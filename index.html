@@ -217,9 +217,10 @@
             color: var(--text-light);
         }
 
+
         .post-image {
             width: 100%;
-            height: 500px;
+            aspect-ratio: 1 / 1;
             background: linear-gradient(135deg, rgba(232, 255, 244, 0.2), rgba(237, 231, 255, 0.2));
             display: flex;
             align-items: center;
@@ -231,7 +232,8 @@
         .post-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            background-color: rgba(255, 255, 255, 0.8);
         }
 
         .post-image-placeholder {
@@ -1108,6 +1110,7 @@
             }
         }
 
+
         @media (max-width: 768px) {
             header {
                 padding: 1rem;
@@ -1115,6 +1118,7 @@
 
             .header-container {
                 gap: 1rem;
+                align-items: center;
             }
 
             .nav-btn {
@@ -1869,8 +1873,9 @@
         </div>
 
 
+
         <div class="post-image" id="postImage">
-            <img src="img/sella.webp" alt="Sella's birthday photo" class="post-birthday-photo" style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1;">
+            <img src="img/sella.webp" alt="Sella's birthday photo" class="post-birthday-photo">
             <input type="file" id="postImageInput" class="post-image-input" accept="image/*">
         </div>
 
