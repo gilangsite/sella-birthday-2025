@@ -2208,13 +2208,100 @@
         Your browser does not support the audio element.
     </audio>
 
+
+    <!-- Supabase JavaScript v2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- PWA Database System -->
     <script src="birthday-db-pwa.js"></script>
 
+
     <script>
 
-
-
+        // ============================================
+        // SUPABASE CONFIGURATION
+        // ============================================
+        
+        // Initialize Supabase with provided credentials
+        const SUPABASE_URL = 'https://zffdnuknupsgjernadbm.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_fK56BOAzc_5be1yoye0ZKQ_1ulUs-Gq';
+        
+        // Create Supabase client
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // ============================================
+        // SUPABASE DATABASE FUNCTIONS
+        // ============================================
+        
+        /**
+         * Send wish to Supabase database
+         * @param {string} name - Name of the person sending wish
+         * @param {string} message - The birthday wish message
+         * @returns {Promise<Object>} - Result of the insert operation
+         */
+        async function sendWish(name, message) {
+            try {
+                const { data, error } = await supabase
+                    .from('wishes')
+                    .insert([
+                        {
+                            name: name.trim(),
+                            message: message.trim()
+                        }
+                    ])
+                    .select();
+                
+                if (error) {
+                    console.error('Supabase insert error:', error);
+                    alert('Gagal mengirim wish. Silakan coba lagi.');
+                    throw error;
+                }
+                
+                console.log('Wish sent successfully:', data);
+                return data;
+            } catch (error) {
+                console.error('sendWish error:', error);
+                alert('Terjadi kesalahan saat mengirim wish. Silakan coba lagi.');
+                throw error;
+            }
+        }
+        
+        /**
+         * Load all wishes from Supabase database, ordered by newest first
+         * @returns {Promise<Array>} - Array of wishes
+         */
+        async function loadWishes() {
+            try {
+                const { data, error } = await supabase
+                    .from('wishes')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                
+                if (error) {
+                    console.error('Supabase select error:', error);
+                    throw error;
+                }
+                
+                console.log('Wishes loaded from Supabase:', data);
+                return data || [];
+            } catch (error) {
+                console.error('loadWishes error:', error);
+                // Fallback to local database
+                console.log('Falling back to local database...');
+                try {
+                    const localWishes = await pwaDB.getAllMessages();
+                    return localWishes.map(msg => ({
+                        id: msg.id || Date.now(),
+                        name: msg.name,
+                        message: msg.text,
+                        created_at: msg.timestamp
+                    }));
+                } catch (localError) {
+                    console.error('Local fallback failed:', localError);
+                    return [];
+                }
+            }
+        }
 
         // ============================================
         // PWA DATABASE SYSTEM INTEGRATION
@@ -2532,34 +2619,70 @@
         // MESSAGES MANAGEMENT
         // ============================================
 
+
         async function addMessage(event) {
             event.preventDefault();
             const name = document.getElementById('nameInput').value.trim();
             const message = document.getElementById('messageInput').value.trim();
 
             if (name && message) {
-                await pwaDB.addMessage(name, message);
-                
-                // Refresh both message displays
-                await renderMessages();
-                await renderFloatingMessages();
+                // Update button text to show loading
+                const submitBtn = event.target.querySelector('button[type="submit"]') || event.target;
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
 
-                // Clear form
-                document.getElementById('nameInput').value = '';
-                document.getElementById('messageInput').value = '';
+                try {
+                    // Send to Supabase first
+                    await sendWish(name, message);
+                    
+                    // Also save to local database for offline access
+                    await pwaDB.addMessage(name, message);
+                    
+                    // Refresh both message displays
+                    await renderMessages();
+                    await renderFloatingMessages();
 
-                // Show success feedback
-                event.target.textContent = 'Wish Sent! ✓';
-                setTimeout(() => {
-                    event.target.textContent = 'Send Wish 💕';
-                }, 2000);
+                    // Clear form
+                    document.getElementById('nameInput').value = '';
+                    document.getElementById('messageInput').value = '';
 
-                showStatus('💌 Message saved!');
-                
-                // Scroll to floating messages to show the new message
-                setTimeout(() => {
-                    scrollToSection('floatingMessages');
-                }, 500);
+                    // Show success feedback
+                    submitBtn.textContent = 'Wish Sent! ✓';
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }, 2000);
+
+                    showStatus('💌 Wish sent successfully!');
+                    
+                    // Scroll to floating messages to show the new message
+                    setTimeout(() => {
+                        scrollToSection('floatingMessages');
+                    }, 500);
+                    
+                } catch (error) {
+                    console.error('Error sending wish:', error);
+                    
+                    // Still try to save locally as fallback
+                    try {
+                        await pwaDB.addMessage(name, message);
+                        await renderFloatingMessages();
+                        document.getElementById('nameInput').value = '';
+                        document.getElementById('messageInput').value = '';
+                        showStatus('💌 Wish saved locally (offline mode)');
+                        setTimeout(() => {
+                            scrollToSection('floatingMessages');
+                        }, 500);
+                    } catch (localError) {
+                        console.error('Local save also failed:', localError);
+                        alert('Gagal mengirim wish. Silakan coba lagi.');
+                    }
+                    
+                    // Reset button
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
             }
         }
 
@@ -2584,6 +2707,8 @@
 
 
 
+
+
         async function renderFloatingMessages() {
             console.log('renderFloatingMessages: Starting...');
             const floatingMessagesList = document.getElementById('floatingMessagesList');
@@ -2594,72 +2719,98 @@
             }
             
             try {
-                // Multiple attempts with increasing delays to ensure PWA DB is ready
-                let attempts = 0;
-                const maxAttempts = 5;
+                // Try to load from Supabase first
+                console.log('renderFloatingMessages: Loading from Supabase...');
+                let supabaseWishes = [];
                 
-                async function attemptLoadMessages() {
-                    attempts++;
-                    console.log(`renderFloatingMessages: Attempt ${attempts}`);
+                try {
+                    supabaseWishes = await loadWishes();
+                    console.log('renderFloatingMessages: Supabase wishes loaded:', supabaseWishes);
                     
-                    try {
-                        const messages = await pwaDB.getAllMessages();
-                        console.log('renderFloatingMessages: Retrieved messages:', messages);
-                        console.log('renderFloatingMessages: Messages count:', messages.length);
+                    if (supabaseWishes.length > 0) {
+                        // Clear existing dynamic messages first
+                        const existingDynamicMessages = floatingMessagesList.querySelectorAll('.floating-message-item.dynamic');
+                        existingDynamicMessages.forEach(msg => msg.remove());
                         
-                        if (messages.length > 0) {
-                            console.log('renderFloatingMessages: Messages found, displaying...');
-                            displayFloatingMessages(messages, floatingMessagesList);
-                            return true;
-                        } else {
-                            console.log('renderFloatingMessages: No messages found, trying again...');
-                            return false;
-                        }
-                    } catch (error) {
-                        console.error('renderFloatingMessages: Error on attempt', attempts, ':', error);
-                        return false;
+                        // Add Supabase wishes as new dynamic messages
+                        supabaseWishes.forEach(wish => {
+                            const messageItem = document.createElement('div');
+                            messageItem.className = 'floating-message-item dynamic';
+                            messageItem.style.cssText = 'opacity: 0.9; transform: translateY(0);';
+                            messageItem.innerHTML = `
+                                <div class="floating-message-name">${escapeHtml(wish.name)}</div>
+                                <div class="floating-message-text">${escapeHtml(wish.message)}</div>
+                            `;
+                            floatingMessagesList.appendChild(messageItem);
+                        });
+                        
+                        console.log('renderFloatingMessages: Added Supabase wishes to display');
+                        return;
                     }
+                } catch (supabaseError) {
+                    console.warn('renderFloatingMessages: Supabase failed, trying local database:', supabaseError);
                 }
                 
-                // Try immediately
-                let success = await attemptLoadMessages();
+                // Fallback to local database
+                console.log('renderFloatingMessages: Trying local database...');
+                let localMessages = [];
                 
-                // If no success, retry with delays
-                if (!success && attempts < maxAttempts) {
-                    for (let i = 1; i < maxAttempts && !success; i++) {
-                        await new Promise(resolve => setTimeout(resolve, 500 * i));
-                        success = await attemptLoadMessages();
-                    }
-                }
-                
-                // If still no success, load default messages
-                if (!success) {
-                    console.log('renderFloatingMessages: Loading default messages after failed attempts...');
-                    const defaultMessages = [
-                        { name: "Mama 💖", text: "Selamat ulang tahun sayang! Mama bangga sama kamu, tumbuh jadi gadis yang cantik dan bijaksana. Semoga semua mimpi kamu tercapai di usia 23 ini! Lots of love! 💕" },
-                        { name: "Papa 🌟", text: "Happy 23rd Birthday princess! Papa always believe you can achieve anything you set your mind to. Wishing you a year filled with happiness, success, and beautiful memories! 🎉" },
-                        { name: "Sister 👑", text: "To the most amazing sister ever! 🎊 Thank you for always being there, for your infectious laugh, and for being my best friend. Hope this birthday is as wonderful as you are! ✨" },
-                        { name: "Bestie Maya 🎈", text: "SELLA!! 💕🎉 Another year older and still the most incredible person I know. Thank you for being such an amazing friend - your kindness, creativity, and spirit inspire me every day. Here's to celebrating YOU today! 🥳" },
-                        { name: "Coworker Team 🎊", text: "Happy Birthday Sella! 🎂 Working with you is always a joy - your positive energy and dedication make every project better. Wishing you all the happiness in the world on your special day! 💖" },
-                        { name: "Auntie Rose 🌹", text: "Happy 23rd Birthday to my dear niece! 🌸 You bring so much joy to our family with your bright smile and caring heart. May this new year of your life be filled with endless blessings! ✨" }
-                    ];
+                try {
+                    localMessages = await pwaDB.getAllMessages();
+                    console.log('renderFloatingMessages: Local messages:', localMessages);
                     
-                    try {
-                        // Add default messages to database
-                        for (const msg of defaultMessages) {
-                            await pwaDB.addMessage(msg.name, msg.text);
-                        }
+                    if (localMessages.length > 0) {
+                        // Clear existing dynamic messages first
+                        const existingDynamicMessages = floatingMessagesList.querySelectorAll('.floating-message-item.dynamic');
+                        existingDynamicMessages.forEach(msg => msg.remove());
                         
-                        // Reload and display messages
-                        const updatedMessages = await pwaDB.getAllMessages();
-                        console.log('renderFloatingMessages: Default messages added:', updatedMessages);
-                        displayFloatingMessages(updatedMessages, floatingMessagesList);
-                    } catch (error) {
-                        console.error('renderFloatingMessages: Failed to add default messages:', error);
-                        // Fallback: show messages directly without saving
-                        displayFloatingMessages(defaultMessages, floatingMessagesList);
+                        // Add local messages as new dynamic messages
+                        localMessages.forEach(msg => {
+                            const messageItem = document.createElement('div');
+                            messageItem.className = 'floating-message-item dynamic';
+                            messageItem.style.cssText = 'opacity: 0.9; transform: translateY(0);';
+                            messageItem.innerHTML = `
+                                <div class="floating-message-name">${escapeHtml(msg.name)}</div>
+                                <div class="floating-message-text">${escapeHtml(msg.text)}</div>
+                            `;
+                            floatingMessagesList.appendChild(messageItem);
+                        });
+                        
+                        console.log('renderFloatingMessages: Added local messages to display');
+                        return;
                     }
+                } catch (localError) {
+                    console.error('renderFloatingMessages: Local database failed:', localError);
                 }
+                
+                // If no messages found anywhere, add default messages as dynamic
+                console.log('renderFloatingMessages: No messages found, loading defaults...');
+                const defaultMessages = [
+                    { name: "Mama 💖", text: "Selamat ulang tahun sayang! Mama bangga sama kamu, tumbuh jadi gadis yang cantik dan bijaksana. Semoga semua mimpi kamu tercapai di usia 23 ini! Lots of love! 💕" },
+                    { name: "Papa 🌟", text: "Happy 23rd Birthday princess! Papa always believe you can achieve anything you set your mind to. Wishing you a year filled with happiness, success, and beautiful memories! 🎉" },
+                    { name: "Sister 👑", text: "To the most amazing sister ever! 🎊 Thank you for always being there, for your infectious laugh, and for being my best friend. Hope this birthday is as wonderful as you are! ✨" },
+                    { name: "Bestie Maya 🎈", text: "SELLA!! 💕🎉 Another year older and still the most incredible person I know. Thank you for being such an amazing friend - your kindness, creativity, and spirit inspire me every day. Here's to celebrating YOU today! 🥳" },
+                    { name: "Coworker Team 🎊", text: "Happy Birthday Sella! 🎂 Working with you is always a joy - your positive energy and dedication make every project better. Wishing you all the happiness in the world on your special day! 💖" },
+                    { name: "Auntie Rose 🌹", text: "Happy 23rd Birthday to my dear niece! 🌸 You bring so much joy to our family with your bright smile and caring heart. May this new year of your life be filled with endless blessings! ✨" }
+                ];
+                
+                // Clear existing dynamic messages
+                const existingDynamicMessages = floatingMessagesList.querySelectorAll('.floating-message-item.dynamic');
+                existingDynamicMessages.forEach(msg => msg.remove());
+                
+                // Add default messages as dynamic messages
+                defaultMessages.forEach(msg => {
+                    const messageItem = document.createElement('div');
+                    messageItem.className = 'floating-message-item dynamic';
+                    messageItem.style.cssText = 'opacity: 0.9; transform: translateY(0);';
+                    messageItem.innerHTML = `
+                        <div class="floating-message-name">${escapeHtml(msg.name)}</div>
+                        <div class="floating-message-text">${escapeHtml(msg.text)}</div>
+                    `;
+                    floatingMessagesList.appendChild(messageItem);
+                });
+                
+                console.log('renderFloatingMessages: Added default messages to display');
                 
             } catch (error) {
                 console.error('renderFloatingMessages: Critical error:', error);
