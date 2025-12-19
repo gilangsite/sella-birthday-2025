@@ -1,0 +1,3018 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy 23rd Birthday, Sella! 🎉</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display:ital@0;1&display=swap"
+        rel="stylesheet">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#C2185B">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sella Birthday">
+
+    <!-- PWA Icons -->
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDAiIHgxPSIwIiB5MT0iMCIgeDI9IjE5MiIgeTI9IjE5MiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjQzIxODVCIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0Y4QkJEOSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjx0ZXh0IHg9Ijk2IiB5PSIxMTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI4MCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TPC90ZXh0Pgo8L3N2Zz4K">
+    <meta name="msapplication-TileColor" content="#C2185B">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pastel-pink: rgba(251, 234, 240, 0.12);
+            --soft-lavender: rgba(237, 231, 255, 0.12);
+            --minty-pastel: rgba(232, 255, 244, 0.12);
+            --warm-beige: rgba(255, 247, 238, 0.15);
+            --accent-gold: #C2185B;
+            --text-dark: #2d2d2d;
+            --text-light: #6b6b6b;
+            --blur-strength: 12px;
+            --white-bg: #FFFFFF;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, rgba(245, 245, 245, 0.95) 0%, rgba(220, 220, 220, 0.7) 20%, rgba(200, 200, 200, 0.5) 40%, rgba(180, 180, 180, 0.3) 60%, rgba(232, 255, 244, 0.2) 80%, rgba(237, 231, 255, 0.2) 100%);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            backdrop-filter: blur(1px);
+        }
+
+        /* Navigation & Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(var(--blur-strength));
+            background: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(233, 201, 168, 0.1);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 8px rgba(45, 45, 45, 0.05);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-gold), #F8BBD9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 16px rgba(194, 24, 91, 0.2);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(var(--blur-strength));
+        }
+
+        .nav-btn.primary {
+            background: linear-gradient(135deg, var(--accent-gold), #F8BBD9);
+            color: white;
+            border: none;
+        }
+
+        .nav-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(194, 24, 91, 0.25);
+        }
+
+        .nav-btn.secondary {
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--text-dark);
+            border: 1px solid rgba(233, 201, 168, 0.2);
+        }
+
+        .nav-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+
+        .nav-btn:focus {
+            outline: 2px solid var(--accent-gold);
+            outline-offset: 2px;
+        }
+
+        /* Music Toggle Button Styling */
+        .music-btn {
+            position: relative;
+            width: 44px !important;
+            height: 44px !important;
+            padding: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border-radius: 50% !important;
+            background: rgba(255, 255, 255, 0.7) !important;
+            color: var(--text-dark) !important;
+            border: 1px solid rgba(233, 201, 168, 0.2) !important;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            background: rgba(255, 255, 255, 0.9) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(233, 201, 168, 0.2);
+        }
+
+        .music-btn[aria-pressed="false"] {
+            background: rgba(194, 24, 91, 0.1) !important;
+            color: var(--accent-gold) !important;
+        }
+
+        .music-btn[aria-pressed="true"] {
+            background: rgba(194, 24, 91, 0.15) !important;
+            color: var(--accent-gold) !important;
+        }
+
+        .music-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2;
+        }
+
+        /* Instagram-Style Birthday Post */
+        .instagram-post {
+            max-width: 500px;
+            margin: 5rem auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(45, 45, 45, 0.1);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .post-header {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid rgba(45, 45, 45, 0.05);
+        }
+
+        .post-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-gold), #F8BBD9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .post-info h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .post-info p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(232, 255, 244, 0.2), rgba(237, 231, 255, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-image-placeholder {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 3rem;
+        }
+
+        .post-image-input {
+            display: none;
+        }
+
+        .post-actions {
+            padding: 1rem 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            border-bottom: 1px solid rgba(45, 45, 45, 0.05);
+        }
+
+        .post-action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+
+        .post-action-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .post-caption {
+            padding: 0 1.5rem 1rem 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .post-caption-edit {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            resize: none;
+            min-height: 60px;
+            padding: 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(45, 45, 45, 0.1);
+        }
+
+        .post-caption-edit:focus {
+            outline: none;
+            border-bottom-color: var(--accent-gold);
+        }
+
+        .post-edit-buttons {
+            display: flex;
+            gap: 0.8rem;
+            padding: 1.5rem;
+        }
+
+        .btn-upload {
+            flex: 1;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, var(--accent-gold), #F8BBD9);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-upload:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(194, 24, 91, 0.3);
+        }
+
+        .btn-clear {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--text-dark);
+            border: 1px solid rgba(45, 45, 45, 0.1);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-clear:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            text-align: center;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-card {
+            backdrop-filter: blur(var(--blur-strength));
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(233, 201, 168, 0.2);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            max-width: 700px;
+            box-shadow: 0 12px 48px rgba(45, 45, 45, 0.15), 0 4px 16px rgba(233, 201, 168, 0.1);
+            animation: slideInScale 0.8s ease 0.2s both;
+        }
+
+        @keyframes slideInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+            font-family: 'DM Serif Display', serif;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--accent-gold), #F8BBD9);
+            color: white;
+            box-shadow: 0 8px 24px rgba(194, 24, 91, 0.15);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(194, 24, 91, 0.25);
+        }
+
+        .cta-btn:focus {
+            outline: 2px solid var(--accent-gold);
+            outline-offset: 2px;
+        }
+
+        /* Message Section */
+        .message-section {
+            padding: 4rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .message-card {
+            backdrop-filter: blur(var(--blur-strength));
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(233, 201, 168, 0.15);
+            border-radius: 25px;
+            padding: 3rem;
+            max-width: 680px;
+            box-shadow: 0 12px 48px rgba(45, 45, 45, 0.15), 0 4px 16px rgba(233, 201, 168, 0.1);
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .message-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .message-card p:last-child {
+            margin-bottom: 0;
+        }
+
+
+        /* Section Titles */
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+            font-family: 'DM Serif Display', serif;
+        }
+
+        /* Itinerary Section */
+        .itinerary-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(232, 255, 244, 0.08) 50%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        .itinerary-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .itinerary-item {
+            backdrop-filter: blur(var(--blur-strength));
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(233, 201, 168, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 12px 48px rgba(45, 45, 45, 0.15), 0 4px 16px rgba(233, 201, 168, 0.1);
+            animation: fadeInUp 0.8s ease;
+            transition: all 0.3s ease;
+        }
+
+        .itinerary-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(45, 45, 45, 0.08);
+        }
+
+        .itinerary-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-gold), #F8BBD9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .itinerary-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .itinerary-content {
+            flex: 1;
+        }
+
+        .itinerary-date {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .itinerary-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .itinerary-location {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .map-btn {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, var(--accent-gold), #F8BBD9);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .map-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(194, 24, 91, 0.25);
+        }
+
+
+        .map-btn:focus {
+            outline: 2px solid var(--accent-gold);
+            outline-offset: 2px;
+        }
+
+        /* Itinerary Photo Styling */
+        .itinerary-photo {
+            margin: 1rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(45, 45, 45, 0.1);
+        }
+
+        .dinner-photo {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-caption {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            text-align: center;
+            font-style: italic;
+            border-top: 1px solid rgba(233, 201, 168, 0.1);
+        }
+
+        /* Gifts Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(45, 45, 45, 0.3);
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            backdrop-filter: blur(var(--blur-strength));
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(233, 201, 168, 0.15);
+            border-radius: 25px;
+            padding: 2rem;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(45, 45, 45, 0.2);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            font-family: 'DM Serif Display', serif;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            color: var(--text-dark);
+        }
+
+        .close-btn:focus {
+            outline: 2px solid var(--accent-gold);
+            border-radius: 50%;
+        }
+
+        .gift-item {
+            backdrop-filter: blur(var(--blur-strength));
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(233, 201, 168, 0.15);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            box-shadow: 0 10px 40px rgba(45, 45, 45, 0.12), 0 4px 12px rgba(233, 201, 168, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .gift-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 24px rgba(45, 45, 45, 0.08);
+        }
+
+        .gift-image {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(232, 255, 244, 0.2), rgba(237, 231, 255, 0.2));
+            border-radius: 12px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .gift-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+
+        .gift-details h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-family: 'DM Serif Display', serif;
+        }
+
+        .gift-details p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .view-more-btn {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, var(--accent-gold), #F8BBD9);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .view-more-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(194, 24, 91, 0.2);
+        }
+
+        .view-more-btn:focus {
+            outline: 2px solid var(--accent-gold);
+            outline-offset: 2px;
+        }
+
+        /* Messages Section */
+        .messages-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(251, 234, 240, 0.08) 50%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        .messages-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .messages-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .messages-list {
+            backdrop-filter: blur(var(--blur-strength));
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(233, 201, 168, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            max-height: 600px;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(45, 45, 45, 0.12), 0 4px 12px rgba(233, 201, 168, 0.08);
+        }
+
+        .message-item {
+            backdrop-filter: blur(var(--blur-strength));
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(233, 201, 168, 0.08);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .message-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .message-name {
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .message-text {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .messages-form {
+            backdrop-filter: blur(var(--blur-strength));
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(233, 201, 168, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(45, 45, 45, 0.12), 0 4px 12px rgba(233, 201, 168, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(233, 201, 168, 0.15);
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(233, 201, 168, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--accent-gold), #F8BBD9);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(233, 201, 168, 0.25);
+        }
+
+        .submit-btn:focus {
+            outline: 2px solid var(--accent-gold);
+            outline-offset: 2px;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(237, 231, 255, 0.08) 50%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        .gallery-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            backdrop-filter: blur(var(--blur-strength));
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(233, 201, 168, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(45, 45, 45, 0.12), 0 4px 12px rgba(233, 201, 168, 0.08);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-item {
+            backdrop-filter: blur(var(--blur-strength));
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(233, 201, 168, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(45, 45, 45, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(45, 45, 45, 0.12);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, rgba(232, 255, 244, 0.15), rgba(237, 231, 255, 0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-caption {
+            padding: 1.5rem;
+        }
+
+        .gallery-caption input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(45, 45, 45, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-caption input:focus {
+            outline: none;
+            border-bottom-color: var(--accent-gold);
+        }
+
+        .gallery-btn-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .gallery-btn {
+            flex: 1;
+            padding: 0.6rem;
+            background: linear-gradient(135deg, var(--accent-gold), #F8BBD9);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-btn:focus {
+            outline: 2px solid var(--accent-gold);
+            outline-offset: 2px;
+        }
+
+        .upload-area {
+            backdrop-filter: blur(var(--blur-strength));
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px dashed rgba(233, 201, 168, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--accent-gold);
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .upload-area p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+
+
+
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(233, 201, 168, 0.1);
+            backdrop-filter: blur(var(--blur-strength));
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .footer-link {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer-link:focus {
+            outline: 2px solid var(--accent-gold);
+            border-radius: 4px;
+        }
+
+        .heart-svg {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin: 0 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+
+            .nav-buttons {
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .hero {
+                min-height: 50vh;
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-card {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .itinerary-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .itinerary-icon {
+                margin: 0 auto;
+            }
+
+            .messages-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+
+            .header-container {
+                gap: 1rem;
+            }
+
+            .nav-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .instagram-post {
+                margin: 3rem auto;
+            }
+
+            .post-image {
+                height: 350px;
+            }
+
+            .hero {
+                min-height: 40vh;
+                padding: 2rem 1rem;
+            }
+
+            .hero-card {
+                padding: 2rem 1rem;
+                border-radius: 20px;
+            }
+
+            .cta-group {
+                gap: 0.8rem;
+            }
+
+            .cta-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .message-section {
+                padding: 3rem 1rem;
+            }
+
+            .message-card {
+                padding: 2rem 1.5rem;
+                border-radius: 20px;
+            }
+
+            .message-card p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .itinerary-section,
+            .messages-section,
+            .gallery-section {
+                padding: 3rem 1rem;
+            }
+
+            .itinerary-item {
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+                gap: 1rem;
+            }
+
+            .itinerary-title {
+                font-size: 1.1rem;
+            }
+
+            .modal-content {
+                width: 90%;
+                max-height: 70vh;
+                padding: 1.5rem;
+                border-radius: 20px;
+            }
+
+            .gift-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .gift-details h3 {
+                font-size: 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .audio-player {
+                bottom: 1rem;
+                left: 1rem;
+            }
+
+            .speaker-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .speaker-btn svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+
+        @media (max-width: 480px) {
+            header {
+                padding: 0.8rem;
+            }
+
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+
+            .nav-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.75rem;
+                flex: 1;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 0.95rem;
+            }
+
+            .instagram-post {
+                margin: 2rem auto;
+                border-radius: 12px;
+            }
+
+            .post-image {
+                height: 250px;
+            }
+
+            .post-header {
+                padding: 1rem;
+            }
+
+            .post-edit-buttons {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .hero {
+                min-height: 40vh;
+                padding: 1.5rem;
+            }
+
+            .hero-card {
+                padding: 1.5rem;
+                border-radius: 15px;
+            }
+
+            .cta-group {
+                gap: 0.6rem;
+            }
+
+            .cta-btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.85rem;
+            }
+
+            .message-section {
+                padding: 2rem 1rem;
+            }
+
+            .message-card {
+                padding: 1.5rem 1rem;
+                border-radius: 15px;
+            }
+
+            .message-card p {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .itinerary-section,
+            .messages-section,
+            .gallery-section,
+            .gifts-section,
+            .floating-messages-section {
+                padding: 2rem 1rem;
+            }
+
+            .itinerary-item {
+                padding: 1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .itinerary-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .itinerary-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .itinerary-title {
+                font-size: 1rem;
+            }
+
+            /* Gifts Section Responsive */
+            .gifts-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .gift-card-image {
+                height: 200px;
+            }
+
+            .gift-card-content {
+                padding: 1.5rem;
+            }
+
+            .gift-card-title {
+                font-size: 1.2rem;
+            }
+
+            /* Floating Messages Responsive */
+            .floating-messages-list {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .floating-message-item {
+                padding: 1.2rem;
+            }
+
+            .floating-message-name {
+                font-size: 0.95rem;
+            }
+
+            .floating-message-text {
+                font-size: 0.9rem;
+            }
+
+            /* Modal Responsive */
+            #mapModal .modal-content,
+            #pdfModal .modal-content {
+                width: 95%;
+            }
+
+            #mapContainer {
+                height: 300px;
+            }
+
+            /* Gift Item Responsive */
+            .gift-item {
+                padding: 1rem;
+            }
+
+            .gift-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .gift-details h3 {
+                font-size: 0.95rem;
+            }
+
+            .form-input,
+            .form-textarea {
+                font-size: 0.9rem;
+                padding: 0.7rem;
+            }
+
+            .audio-player {
+                bottom: 0.8rem;
+                left: 0.8rem;
+            }
+
+            .messages-list {
+                max-height: 400px;
+            }
+        }
+
+
+        /* Gifts Section */
+        .gifts-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(251, 234, 240, 0.08) 50%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        .gifts-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .gifts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .gift-card {
+            backdrop-filter: blur(var(--blur-strength));
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(233, 201, 168, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 48px rgba(45, 45, 45, 0.15), 0 4px 16px rgba(233, 201, 168, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .gift-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(45, 45, 45, 0.2);
+        }
+
+        .gift-card-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(232, 255, 244, 0.2), rgba(237, 231, 255, 0.2));
+            overflow: hidden;
+        }
+
+        .gift-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-card:hover .gift-card-image img {
+            transform: scale(1.05);
+        }
+
+        .gift-card-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(232, 255, 244, 0.3), rgba(237, 231, 255, 0.3));
+            color: var(--text-light);
+        }
+
+        .gift-card-placeholder span {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .gift-card-placeholder p {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .gift-card-content {
+            padding: 2rem;
+        }
+
+        .gift-card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-family: 'DM Serif Display', serif;
+        }
+
+        .gift-card-subtitle {
+            font-size: 1rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .gift-card-description {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .gift-card-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--accent-gold), #F8BBD9);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .gift-card-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(194, 24, 91, 0.25);
+        }
+
+
+        /* Floating Messages Section */
+        .floating-messages-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(251, 234, 240, 0.12) 50%, rgba(255, 255, 255, 1) 100%);
+            position: relative;
+        }
+
+        .floating-messages-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .floating-messages-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+            font-family: 'DM Serif Display', serif;
+        }
+
+        .floating-messages-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+
+        .floating-message-item {
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(233, 201, 168, 0.2);
+            border-radius: 25px;
+            padding: 2rem;
+            box-shadow: 
+                0 12px 40px rgba(45, 45, 45, 0.12), 
+                0 4px 16px rgba(233, 201, 168, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: floatIn 0.8s ease forwards, gentleFloat 4s ease-in-out infinite 1.2s;
+            opacity: 0.8;
+            transform: translateY(30px);
+            position: relative;
+            overflow: hidden;
+            filter: opacity(0.8);
+        }
+
+        .floating-message-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(194, 24, 91, 0.3), transparent);
+            opacity: 0;
+            animation: shimmer 2s ease-in-out infinite 2s;
+        }
+
+        @keyframes floatIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+
+        @keyframes shimmer {
+            0% { opacity: 0; transform: translateX(-100%); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(100%); }
+        }
+
+        .floating-message-item:nth-child(1) {
+            animation-delay: 0.1s, 1.2s;
+        }
+
+        .floating-message-item:nth-child(2) {
+            animation-delay: 0.2s, 1.4s;
+        }
+
+        .floating-message-item:nth-child(3) {
+            animation-delay: 0.3s, 1.6s;
+        }
+
+        .floating-message-item:nth-child(4) {
+            animation-delay: 0.4s, 1.8s;
+        }
+
+        .floating-message-item:nth-child(5) {
+            animation-delay: 0.5s, 2.0s;
+        }
+
+        .floating-message-item:nth-child(6) {
+            animation-delay: 0.6s, 2.2s;
+        }
+
+        .floating-message-item:nth-child(7) {
+            animation-delay: 0.7s, 2.4s;
+        }
+
+        .floating-message-item:nth-child(8) {
+            animation-delay: 0.8s, 2.6s;
+        }
+
+        .floating-message-item:nth-child(9) {
+            animation-delay: 0.9s, 2.8s;
+        }
+
+        .floating-message-item:nth-child(10) {
+            animation-delay: 1.0s, 3.0s;
+        }
+
+        .floating-message-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 20px 60px rgba(45, 45, 45, 0.15),
+                0 8px 24px rgba(233, 201, 168, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            border-color: rgba(194, 24, 91, 0.25);
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .floating-message-name {
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            position: relative;
+        }
+
+        .floating-message-name::before {
+            content: "💕";
+            font-size: 1rem;
+            animation: heartBeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+        }
+
+        .floating-message-text {
+            color: var(--text-dark);
+            font-size: 1rem;
+            line-height: 1.7;
+            font-style: italic;
+            position: relative;
+        }
+
+        .floating-message-text::before {
+            content: '"';
+            font-size: 2rem;
+            color: rgba(194, 24, 91, 0.2);
+            position: absolute;
+            left: -15px;
+            top: -10px;
+            font-family: serif;
+        }
+
+        .floating-message-text::after {
+            content: '"';
+            font-size: 2rem;
+            color: rgba(194, 24, 91, 0.2);
+            position: absolute;
+            right: -10px;
+            bottom: -15px;
+            font-family: serif;
+        }
+
+
+
+
+        /* Enhanced Modal Styling */
+        #mapModal .modal-content {
+            max-width: 900px;
+        }
+
+        #pdfModal {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            overflow: hidden !important;
+            padding: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+
+        #pdfModal.active {
+            display: flex;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #pdfModal .modal-content {
+            width: 90vw;
+            max-width: 800px;
+            height: 85vh;
+            max-height: 700px;
+            overflow: hidden;
+            position: relative;
+            margin: 0;
+            z-index: 10001;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        #pdfModal.active .modal-content {
+            transform: scale(1);
+        }
+
+        /* PDF Viewer Container */
+        .pdf-viewer-container {
+            width: 100%;
+            height: calc(100% - 80px);
+            border-radius: 15px;
+            overflow: hidden;
+            background: #f5f5f5;
+            position: relative;
+        }
+
+        .pdf-viewer-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
+            background: white;
+        }
+
+
+        @media (max-width: 768px) {
+            #pdfModal .modal-content {
+                width: 95vw;
+                height: 80vh;
+            }
+
+            .pdf-viewer-container {
+                height: calc(100% - 70px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            #pdfModal .modal-content {
+                width: 98vw;
+                height: 75vh;
+                border-radius: 15px;
+            }
+
+            .pdf-viewer-container {
+                height: calc(100% - 60px);
+                border-radius: 10px;
+            }
+
+            .pdf-viewer-container iframe {
+                border-radius: 10px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+
+            .audio-player,
+            .nav-buttons,
+            .messages-form,
+            .upload-area,
+            .post-actions,
+            .post-edit-buttons,
+            .floating-messages-section,
+            .gifts-section {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="header-container">
+            <div class="logo" aria-label="Sella 23">S</div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn secondary" onclick="scrollToSection('itinerary')" aria-label="See Itinerary">See
+                    Itinerary</button>
+                <button class="nav-btn secondary" onclick="scrollToSection('gifts')" aria-label="View Gifts">View
+                    Gifts</button>
+                <button class="nav-btn primary" onclick="openGiftsModal()" aria-label="Open Gifts">Open Gifts</button>
+
+                <button class="nav-btn secondary" onclick="scrollToSection('floatingMessages')"
+                    aria-label="View Messages">View Messages</button>
+                
+                <!-- Music Toggle Button -->
+                <button id="music-toggle" class="nav-btn music-btn" aria-label="Toggle background music" aria-pressed="true">
+                    <svg id="icon-muted" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 9L15 15M15 9L9 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M11 5L6 9H3V15H6L11 19V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
+                    <svg id="icon-sound" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display: none;">
+                        <path d="M11 5L6 9H3V15H6L11 19V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M15 9C16.333 10.333 16.333 13.667 15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M17.5 6.5C20 9 20 15 17.5 17.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Instagram-Style Birthday Post -->
+    <section class="instagram-post">
+        <div class="post-header">
+            <div class="post-avatar">S</div>
+            <div class="post-info">
+                <h3>Sella</h3>
+                <p>Dec 20, 2025</p>
+            </div>
+        </div>
+
+
+        <div class="post-image" id="postImage">
+            <img src="img/sella.webp" alt="Sella's birthday photo" class="post-birthday-photo" style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1;">
+            <input type="file" id="postImageInput" class="post-image-input" accept="image/*">
+        </div>
+
+        <div class="post-actions">
+            <button class="post-action-btn" onclick="togglePostLike()" id="likeBtn" aria-label="Like post">❤️</button>
+            <button class="post-action-btn" onclick="uploadPostImage()" aria-label="Add photo">📷</button>
+        </div>
+
+        <div class="post-caption">
+            <textarea class="post-caption-edit" id="postCaption"
+                placeholder="Add a caption...">Happy 23rd Birthday to me! 🎉✨ Thank you to everyone who made this day special 💕</textarea>
+            <div class="post-edit-buttons">
+                <button class="btn-upload" onclick="savePost()">Save Post</button>
+                <button class="btn-clear" onclick="clearPost()">Clear</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-card">
+            <h1>Happy 23rd Birthday, Sella!</h1>
+            <p class="subtitle">December 20, 2025 — Cheers to 23 ✨</p>
+
+
+            <div class="cta-group">
+                <button class="cta-btn" onclick="scrollToSection('itinerary')">See Itinerary</button>
+                <button class="cta-btn" onclick="scrollToSection('gifts')">View Gifts</button>
+                <button class="cta-btn" onclick="openGiftsModal()">Open Gifts</button>
+                <button class="cta-btn" onclick="scrollToSection('floatingMessages')">View Messages</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Birthday Message Section -->
+    <section class="message-section">
+        <div class="message-card">
+            <p>Dear Sella,</p>
+            <p>Another year older, another year wiser, and definitely another year filled with amazing memories to come!
+                💫 Here's to celebrating YOU on this special day, your kindness, your passion, and that infectious
+                laugh that lights up every room!</p>
+            <p>Whether you're slaying at work, creating magic with your projects, or just vibing with the people you
+                love, you do it all with such grace and authenticity. That's what makes you absolutely one of a kind! ✨
+            </p>
+            <p>So today, we celebrate all of that and so much more. Let's make this 23rd year unforgettable, filled with
+                joy, growth, laughter, and all the little moments that make life beautiful.</p>
+            <p>Happy Birthday to the most incredible human! Here's to 23. may it be your best year yet!💕</p>
+        </div>
+    </section>
+
+    <!-- Gifts Display Section -->
+    <section class="gifts-section" id="gifts">
+        <div class="gifts-container">
+            <h2 class="section-title">Special Gifts</h2>
+            <div class="gifts-grid">
+
+
+
+
+
+                <div class="gift-card">
+                    <div class="gift-card-image">
+                        <img src="img/jam.webp" alt="Olivia Burton Classic Mini Watch - Gold" loading="lazy">
+                    </div>
+                    <div class="gift-card-content">
+                        <h3 class="gift-card-title">Olivia Burton Classic Mini</h3>
+                        <p class="gift-card-subtitle">OB16M — Elegant Timepiece</p>
+                        <p class="gift-card-description">Elegant minimalist timepiece with delicate gold accents.
+                            Perfect for everyday elegance and sophisticated style.</p>
+                        <button onclick="openGiftsModal()" class="gift-card-btn">View Details</button>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="gift-card">
+                    <div class="gift-card-image">
+                        <img src="img/hoodie.webp" alt="The World Met Sella Special Hoodie" loading="lazy">
+                    </div>
+                    <div class="gift-card-content">
+                        <h3 class="gift-card-title">The World Met Sella</h3>
+                        <p class="gift-card-subtitle">Special Hoodie</p>
+                        <p class="gift-card-description">Exclusive limited edition hoodie celebrating your unique story.
+                            Soft, comfortable, and uniquely designed just for you.</p>
+                        <button onclick="openPdfModal()" class="gift-card-btn">View Design</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Itinerary Section -->
+    <section class="itinerary-section" id="itinerary">
+        <div class="itinerary-container">
+            <h2 class="section-title">The Itinerary</h2>
+
+
+
+
+
+
+
+
+            <div class="itinerary-item">
+                <div class="itinerary-content">
+                    <div class="itinerary-date">Dec 21, 2025</div>
+                    <div class="itinerary-title">Dinner</div>
+                    <div class="itinerary-location">Melas</div>
+                    <div class="itinerary-photo">
+                        <img src="img/melas.webp" alt="Melas restaurant dinner" class="dinner-photo" loading="lazy">
+                        <div class="photo-caption">having a love dinner at 21, Desember, 2025 - 05.00 PM</div>
+                    </div>
+                    <button onclick="openMapModal('dinner')" class="map-btn"
+                        aria-label="View Melas location on map">View map</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Google Maps Modal -->
+    <div id="mapModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2 class="modal-title" id="mapModalTitle">Location</h2>
+                <button class="close-btn" onclick="closeMapModal()" aria-label="Close map modal">&times;</button>
+            </div>
+            <div id="mapContainer" style="width: 100%; height: 400px; border-radius: 15px; overflow: hidden;">
+                <!-- Google Maps will be embedded here -->
+            </div>
+        </div>
+    </div>
+
+
+
+    s
+
+
+    <!-- PDF Viewer Modal -->
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">The World Met Sella — Special Hoodie</h2>
+                <button class="close-btn" onclick="closePdfModal()" aria-label="Close PDF modal">&times;</button>
+            </div>
+
+            <div class="pdf-viewer-container">
+                <iframe src="pdf/hoodie.pdf" title="The World Met Sella PDF" loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gifts Modal -->
+    <div id="giftsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Gifts 🎁</h2>
+                <button class="close-btn" onclick="closeGiftsModal()" aria-label="Close gifts modal">&times;</button>
+            </div>
+
+
+
+
+
+
+            <div class="gift-item">
+                <div class="gift-image">
+                    <img src="img/jam.webp" alt="Olivia Burton Classic Mini Watch - Gold" loading="lazy">
+                </div>
+                <div class="gift-details">
+                    <h3>Olivia Burton Classic Mini — OB16M</h3>
+                    <p>Elegant minimalist timepiece with delicate gold accents. Perfect for everyday elegance and
+                        sophisticated style. 24-hour dial with refined aesthetic.</p>
+                    <a href="https://watchfactory.com.au/products/ob16mn13" target="_blank" rel="noopener noreferrer"
+                        class="view-more-btn">View more</a>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="gift-item">
+                <div class="gift-image">
+                    <img src="img/hoodie.webp" alt="The World Met Sella Special Hoodie" loading="lazy">
+                </div>
+                <div class="gift-details">
+                    <h3>The World Met Sell — Special Hoodie</h3>
+                    <p>Exclusive limited edition hoodie celebrating your unique story. Soft, comfortable, and uniquely
+                        designed just for you. A wearable reminder of your specialness.</p>
+                    <button onclick="openPdfModal()" class="view-more-btn">View Design</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Floating Messages Section -->
+    <section class="floating-messages-section" id="floatingMessages">
+        <div class="floating-messages-container">
+            <h2 class="floating-messages-title">Messages from Admire 💌</h2>
+            <div class="floating-messages-list" id="floatingMessagesList">
+                <!-- Messages from friends - loaded via JavaScript -->
+                <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
+                    <div class="floating-message-name">Sara Pratistha</div>
+                    <div class="floating-message-text">Cellaku yang ndak pernh tua nan ceria selalu, sehat terus dan panjang umur ya non. Terima kasih udah selalu hadir di hidupku dalam moment apapun, semoga Tuhan selalu mempermudah & lancarkan usaha serta citamu. Semoga senantiasa bahagia, penuh kekayaan dan ketenangan, Tuhan selalu lindungi langkahmu dimanapun berada. Semangat terus Cella and happy birthday🤍</div>
+                </div>
+                
+                <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
+                    <div class="floating-message-name">Syahrena</div>
+                    <div class="floating-message-text">Happy level up cella!  sehat dan sukses selalu , bersinar di wajah dan karir nya semoga centil nya bertambah tapi lola nya berkurang yaaaa</div>
+                </div>
+                
+                <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
+                    <div class="floating-message-name">Fatimah</div>
+                    <div class="floating-message-text">happy birthday depoyyy.... selalu dilancarkan dalam hal apapun, sehat selalu dan apapun yang kamu panjatkan segera dikabulkan.Aamiin</div>
+                </div>
+                
+                <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
+                    <div class="floating-message-name">Muktiah (Imoy)</div>
+                    <div class="floating-message-text">Barakallahu fii umyrik wa hayati fi rezeki devitulllllllll yang cantilitull🌹🌹🫶🏻🫶🏻🫶🏻Berkah dunia wa akhirat .  Qobul segala hajat dunia wa akhirat .. Lancar segala urusan dunia dan akhirat kamu.. banyak² mendapatkan kasih sayang yg tulus dr org² sekitar kamu, dijauhkan dari hal² yg gabaik buat kmu serta dijauhin dr org² yg sirik&jahat sm kamu.. Panjng umur kamu, sehat badan kamu, makin disayang dan dicintai sama ayang kamu ya depooyyy🤍🤍🤍🤍🤍🤍 Emm apalagi ya depooyy,  Intinyaa SELALU BAHAGIA YA DEPOYYY .. 🌹🌹🌹🫶🏻🫶🏻🫶🏻🫶🏻💐💐💐🤍🤍🤍🤍🤍🤍🤍🤍🤍  생일 축하해 데비타 🎂🥳🥳🥳🥳🥳 ILYDEPOYY😽</div>
+                </div>
+                
+                <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
+                    <div class="floating-message-name">Bunga Revalina</div>
+                    <div class="floating-message-text">haii mba devita, ucapan dari aku Semoga kisah hidupmu terus ditulis dengan indah. Selamat ulang tahun, teruslah bersinar! Terimakasih sudah mau menjadi bagian teman keluh kesa aku loveyou so much 🥹🫶🏻🥰</div>
+                </div>
+                
+                <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
+                    <div class="floating-message-name">Adi Imeng</div>
+                    <div class="floating-message-text">Hallllllllo mba, udah tua aja nihh yee, happy birthday, sililimit iling tihinnnnn yak, Do'anya semoga sehat selalu dan desertai keberkahan, dilancarkan rezekinya dan karir nyaa makin merowkettt yak, gitu ajaaa deh ya mba, satu lagiii deh mba, cepet² merid deh yaa sama massehhhh 🤟🎉🥳🎂</div>
+                </div>
+                
+                <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
+                    <div class="floating-message-name">Dewi Shinelife</div>
+                    <div class="floating-message-text">Happy Birthday Cantikk, Sehatt selaluu yaa🤗 Karir makin besoknarr 🌈. langgeng terus sama Gilang miss you</div>
+                </div>
+                
+                <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
+                    <div class="floating-message-name">Andika Chris</div>
+                    <div class="floating-message-text">Haloo Devita, selamat ulang tahun! Semoga di umur ke-23 tahun ini selalu diberikan kesehatann, mental yang kuat dan rezekii sebanyak-banyaknya dan semoga hal-hal baik selalu menyertai!</div>
+                </div>
+                
+                <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
+                    <div class="floating-message-name">Iben Alxaitham</div>
+                    <div class="floating-message-text">Halo ka devita, selamat ulang tahun untuk umur ke 23 tahun ka, semoga terus di beri kesehatan, makin cantik, sukses terus🤩🥳🥳🎈🎆</div>
+                </div>
+                
+                <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
+                    <div class="floating-message-name">Yasmin Nafisah</div>
+                    <div class="floating-message-text">HAPPY BIRTHDAY, DEVITA! May your day be filled with endless love, laughter, and blessing. You deserve all the happiness in the world, and i hope this year brings you closer to your dreams, filled with beautiful moments, good health, and endless happiness. Keep going and growing, wherever you are. Happy birthday one again!</div>
+                </div>
+                
+                <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
+                    <div class="floating-message-name">Dewi Sukmawati</div>
+                    <div class="floating-message-text">Happy birthday, Dev 🎉🤍, ga kerasa kita udah 7 years of friendship dari ketawa random sampai phase hidup yang chaotic tapi we survived it together. thank you for always being there for me, for listening to all my nonsense, and for never leaving no matter how messy things get. inget ga pas jaman gw masih di bekasi wkwkwk, lu bantu gw banget sampe bisa kayak skrg🥹. i hope this new chapter brings you more happiness, peace of mind, and everything good you truly deserve. Please stay being you kind, strong, and genuine, grateful to have you in my life, and hopefully kita masih bareng terus for many more years to come 🫶✨</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Messages Section -->
+    <section class="messages-section" id="messages">
+        <div class="messages-container">
+            <div style="grid-column: 1 / -1;">
+                <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Leave a Message</h2>
+                <form class="messages-form" onsubmit="addMessage(event)">
+                    <div class="form-group">
+                        <label for="nameInput" class="form-label">Your Name</label>
+                        <input type="text" id="nameInput" class="form-input" placeholder="Enter your name" required
+                            aria-label="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="messageInput" class="form-label">Your Message</label>
+                        <textarea id="messageInput" class="form-textarea" placeholder="Write your birthday wish..."
+                            required aria-label="Your birthday message"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" aria-label="Submit birthday message">Send Wish 💕</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="gallery-container">
+            <h2 class="section-title">Photo Gallery</h2>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be added here -->
+            </div>
+            <div class="upload-area">
+                <p>✨ Add your photos here — Template ready for upload</p>
+                <button class="cta-btn" onclick="addGalleryItem()" style="width: auto; padding: 0.8rem 2rem;">Add
+                    Photo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Made with <svg class="heart-svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                </svg> for Sella's 23rd Birthday | <a href="#" class="footer-link"
+                    onclick="editMessage(); return false;">Edit message</a></p>
+        </div>
+    </footer>
+
+
+
+    <!-- Background Music Audio Element -->
+    <!-- 
+        Browser Autoplay Behavior:
+        - Modern browsers block autoplay with sound for user experience
+        - Autoplay with muted audio is generally allowed
+        - User interaction (click) is required to unmute
+        - This implementation starts muted and allows user to unmute via toggle button
+    -->
+    <audio
+        id="background-music"
+        src="music/hbd.mp3"
+        loop
+        preload="auto"
+        muted
+        style="display: none;"
+    >
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- PWA Database System -->
+    <script src="birthday-db-pwa.js"></script>
+
+    <script>
+
+
+
+
+        // ============================================
+        // PWA DATABASE SYSTEM INTEGRATION
+        // ============================================
+
+        // Initialize PWA Database (will handle fallback automatically)
+        let pwaDB;
+
+        async function initDatabase() {
+            try {
+                pwaDB = new BirthdayPwaDB();
+                console.log('PWA Database initialized successfully');
+
+                // Show PWA install prompt if available
+                setTimeout(() => {
+                    pwaDB.showInstallPrompt().then(prompt => {
+                        if (prompt) {
+                            const installBanner = document.createElement('div');
+                            installBanner.style.cssText = `
+                                position: fixed;
+                                top: 20px;
+                                right: 20px;
+                                background: linear-gradient(135deg, #C2185B, #F8BBD9);
+                                color: white;
+                                padding: 1rem 1.5rem;
+                                border-radius: 12px;
+                                box-shadow: 0 8px 24px rgba(194, 24, 91, 0.3);
+                                z-index: 10000;
+                                animation: slideInRight 0.5s ease;
+                                max-width: 300px;
+                                font-family: 'DM Sans', sans-serif;
+                            `;
+                            installBanner.innerHTML = `
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <span style="font-size: 1.2rem;">📱</span>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600; margin-bottom: 0.25rem;">Install App?</div>
+                                        <div style="font-size: 0.85rem; opacity: 0.9;">Install this app for a better experience</div>
+                                    </div>
+                                    <button onclick="this.parentElement.parentElement.remove(); pwaDB.showInstallPrompt();" 
+                                            style="background: rgba(255,255,255,0.2); border: none; color: white; 
+                                                   padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                                        Install
+                                    </button>
+                                </div>
+                            `;
+                            document.body.appendChild(installBanner);
+
+                            // Auto-hide after 10 seconds
+                            setTimeout(() => {
+                                if (installBanner.parentElement) {
+                                    installBanner.remove();
+                                }
+                            }, 10000);
+                        }
+                    });
+                }, 5000);
+
+            } catch (error) {
+                console.error('Failed to initialize PWA Database:', error);
+                // Fallback will be handled by the BirthdayPwaDB class
+            }
+        }
+
+        // ============================================
+        // INSTAGRAM-STYLE POST MANAGEMENT
+        // ============================================
+        function uploadPostImage() {
+            document.getElementById('postImageInput').click();
+        }
+
+
+        document.getElementById('postImageInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = async (event) => {
+                    const postImage = document.getElementById('postImage');
+                    postImage.innerHTML = `<img src="${event.target.result}" alt="Birthday post image">`;
+                    const post = await pwaDB.getPost();
+                    post.image = event.target.result;
+                    await pwaDB.savePost(post);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+
+        function togglePostLike() {
+            const btn = document.getElementById('likeBtn');
+            pwaDB.getPost().then(post => {
+                post.likes = post.likes > 0 ? 0 : 1;
+                pwaDB.savePost(post);
+                btn.textContent = post.likes > 0 ? '❤️' : '🤍';
+            });
+        }
+
+        function savePost() {
+            const caption = document.getElementById('postCaption').value;
+            pwaDB.getPost().then(post => {
+                post.caption = caption;
+                pwaDB.savePost(post);
+                showStatus('Post saved! 💾');
+            });
+        }
+
+        function clearPost() {
+            if (confirm('Clear post? This cannot be undone.')) {
+                document.getElementById('postImage').innerHTML = '<div class="post-image-placeholder">📸</div>';
+                document.getElementById('postCaption').value = '';
+                pwaDB.savePost({ image: null, caption: '', likes: 0 });
+                showStatus('Post cleared ✨');
+            }
+        }
+
+        async function loadPost() {
+            const post = await pwaDB.getPost();
+            if (post.image) {
+                document.getElementById('postImage').innerHTML = `<img src="${post.image}" alt="Birthday post image">`;
+            }
+            if (post.caption) {
+                document.getElementById('postCaption').value = post.caption;
+            }
+            if (post.likes > 0) {
+                document.getElementById('likeBtn').textContent = '❤️';
+            }
+        }
+
+
+
+        // ============================================
+        // HTML5 AUDIO BACKGROUND MUSIC WITH TOGGLE
+        // ============================================
+        /*
+         * Browser Autoplay Behavior:
+         * 1. HTML5 audio with muted attribute can autoplay in most browsers
+         * 2. User interaction required to unmute (browsers block unmuted autoplay)
+         * 3. The loop attribute enables continuous playback
+         * 4. preload="auto" ensures audio is ready when needed
+         * 5. Toggle button changes muted property and manages playback state
+         */
+
+        const audio = document.getElementById('background-music');
+        const toggleBtn = document.getElementById('music-toggle');
+        const iconMuted = document.getElementById('icon-muted');
+        const iconSound = document.getElementById('icon-sound');
+
+        let isMuted = true;
+
+        // Initialize audio element
+        audio.volume = 0.5; // Set comfortable volume level
+
+        // Attempt to autoplay when page loads (will start muted)
+        audio.play().then(() => {
+            console.log('Background music autoplay started (muted)');
+            showStatus('🎵 Music ready - click to unmute');
+        }).catch(error => {
+            console.log('Autoplay prevented:', error);
+            showStatus('🔇 Click music button to start');
+        });
+
+        toggleBtn.addEventListener('click', () => {
+            if (isMuted) {
+                // Unmute and play
+                audio.muted = false;
+                audio.play().then(() => {
+                    iconMuted.style.display = 'none';
+                    iconSound.style.display = 'block';
+                    toggleBtn.setAttribute('aria-pressed', 'true');
+                    showStatus('🎵 Music playing...');
+                }).catch(error => {
+                    console.error('Playback failed:', error);
+                    showStatus('❌ Playback failed');
+                });
+            } else {
+                // Mute (keep playing)
+                audio.muted = true;
+                iconMuted.style.display = 'block';
+                iconSound.style.display = 'none';
+                toggleBtn.setAttribute('aria-pressed', 'false');
+                showStatus('🔇 Music muted');
+            }
+            isMuted = !isMuted;
+        });
+
+        // Handle audio loading errors
+        audio.addEventListener('error', (e) => {
+            console.error('Audio loading error:', e);
+            showStatus('❌ Audio file not found');
+        });
+
+
+        // Handle audio canplay event
+        audio.addEventListener('canplay', () => {
+            console.log('Audio ready to play');
+        });
+
+        // ============================================
+        // GALLERY MANAGEMENT
+        // ============================================
+
+        async function createGalleryItem(index = null) {
+            const galleryGrid = document.getElementById('galleryGrid');
+            const itemIndex = index !== null ? index : galleryGrid.children.length;
+
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `
+                <div class="gallery-img" onclick="expandGalleryImage(this)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect fill='%23FFFFFF' width='300' height='200'/%3E%3Crect fill='%23E8FFF4' x='50' y='50' width='200' height='100' opacity='0.1'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-family='DM Sans' font-size='24' fill='%236b6b6b'%3EPhoto ${itemIndex + 1}%3C/text%3E%3C/svg%3E" alt="Gallery photo placeholder">
+                </div>
+                <div class="gallery-caption">
+                    <input type="text" class="gallery-caption-text" placeholder="Add caption..." value="Photo ${itemIndex + 1}">
+                    <div class="gallery-btn-group">
+                        <button type="button" class="gallery-btn" onclick="replaceGalleryImage(this)">Replace</button>
+                        <button type="button" class="gallery-btn" onclick="deleteGalleryItem(this)">Delete</button>
+                    </div>
+                </div>
+            `;
+
+            galleryGrid.appendChild(item);
+            await pwaDB.addGalleryItem({ caption: `Photo ${itemIndex + 1}`, image: null });
+        }
+
+        function addGalleryItem() {
+            createGalleryItem();
+        }
+
+
+        function replaceGalleryImage(btn) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = async (event) => {
+                        const img = btn.closest('.gallery-item').querySelector('img');
+                        img.src = event.target.result;
+                        const index = Array.from(document.querySelectorAll('.gallery-item')).indexOf(btn.closest('.gallery-item'));
+                        const caption = btn.closest('.gallery-item').querySelector('.gallery-caption-text').value;
+                        await pwaDB.updateGalleryItem(index + 1, { image: event.target.result, caption });
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            input.click();
+        }
+
+        async function deleteGalleryItem(btn) {
+            const item = btn.closest('.gallery-item');
+            const index = Array.from(document.querySelectorAll('.gallery-item')).indexOf(item);
+            item.style.animation = 'fadeOut 0.3s ease';
+            setTimeout(async () => {
+                item.remove();
+                await pwaDB.deleteGalleryItem(index + 1);
+            }, 300);
+        }
+
+        function expandGalleryImage(imgContainer) {
+            const img = imgContainer.querySelector('img');
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.style.zIndex = '2000';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 800px;">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Photo</h3>
+                        <button class="close-btn" onclick="this.closest('.modal').remove()" aria-label="Close photo view">&times;</button>
+                    </div>
+                    <div style="width: 100%; max-height: 500px; border-radius: 15px; overflow: hidden;">
+                        <img src="${img.src}" alt="Gallery photo" style="width: 100%; height: auto; display: block;">
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.remove();
+            });
+        }
+
+
+        async function initGallery() {
+            const savedGallery = await pwaDB.getAllGalleryItems();
+            if (savedGallery.length === 0) {
+                for (let i = 0; i < 3; i++) {
+                    await createGalleryItem(i);
+                }
+            } else {
+                // Load existing gallery items
+                const galleryGrid = document.getElementById('galleryGrid');
+                galleryGrid.innerHTML = '';
+                savedGallery.forEach(async (item, index) => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.innerHTML = `
+                        <div class="gallery-img" onclick="expandGalleryImage(this)">
+                            <img src="${item.image || 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 300 200\'%3E%3Crect fill=\'%23FFFFFF\' width=\'300\' height=\'200\'/%3E%3Crect fill=\'%23E8FFF4\' x=\'50\' y=\'50\' width=\'200\' height=\'100\' opacity=\'0.1\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' font-family=\'DM Sans\' font-size=\'24\' fill=\'%236b6b6b\'%3EPhoto ${index + 1}%3C/text%3E%3C/svg%3E'}" alt="Gallery photo">
+                        </div>
+                        <div class="gallery-caption">
+                            <input type="text" class="gallery-caption-text" placeholder="Add caption..." value="${escapeHtml(item.caption)}">
+                            <div class="gallery-btn-group">
+                                <button type="button" class="gallery-btn" onclick="replaceGalleryImage(this)">Replace</button>
+                                <button type="button" class="gallery-btn" onclick="deleteGalleryItem(this)">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                    galleryGrid.appendChild(galleryItem);
+                });
+            }
+        }
+
+        // ============================================
+        // MESSAGES MANAGEMENT
+        // ============================================
+
+        async function addMessage(event) {
+            event.preventDefault();
+            const name = document.getElementById('nameInput').value.trim();
+            const message = document.getElementById('messageInput').value.trim();
+
+            if (name && message) {
+                await pwaDB.addMessage(name, message);
+                
+                // Refresh both message displays
+                await renderMessages();
+                await renderFloatingMessages();
+
+                // Clear form
+                document.getElementById('nameInput').value = '';
+                document.getElementById('messageInput').value = '';
+
+                // Show success feedback
+                event.target.textContent = 'Wish Sent! ✓';
+                setTimeout(() => {
+                    event.target.textContent = 'Send Wish 💕';
+                }, 2000);
+
+                showStatus('💌 Message saved!');
+                
+                // Scroll to floating messages to show the new message
+                setTimeout(() => {
+                    scrollToSection('floatingMessages');
+                }, 500);
+            }
+        }
+
+
+
+        /*************  ✨ Windsurf Command 🌟  *************/
+        async function renderMessages() {
+            console.log('renderMessages: Starting to render messages...');
+            // Remove reference to missing messagesList element since we're using floating messages
+            const messages = await pwaDB.getAllMessages();
+            console.log('renderMessages: Retrieved messages:', messages);
+            
+            // Just update the floating messages display instead
+            await renderFloatingMessages();
+            
+            console.log('renderMessages: Messages redirected to floating display.');
+        }
+        /*******  b387dfd3-d73e-4619-a674-f5eab98a13d2  *******/
+
+
+
+
+
+
+        async function renderFloatingMessages() {
+            console.log('renderFloatingMessages: Starting...');
+            const floatingMessagesList = document.getElementById('floatingMessagesList');
+            
+            if (!floatingMessagesList) {
+                console.error('Floating messages list element not found!');
+                return;
+            }
+            
+            try {
+                // Multiple attempts with increasing delays to ensure PWA DB is ready
+                let attempts = 0;
+                const maxAttempts = 5;
+                
+                async function attemptLoadMessages() {
+                    attempts++;
+                    console.log(`renderFloatingMessages: Attempt ${attempts}`);
+                    
+                    try {
+                        const messages = await pwaDB.getAllMessages();
+                        console.log('renderFloatingMessages: Retrieved messages:', messages);
+                        console.log('renderFloatingMessages: Messages count:', messages.length);
+                        
+                        if (messages.length > 0) {
+                            console.log('renderFloatingMessages: Messages found, displaying...');
+                            displayFloatingMessages(messages, floatingMessagesList);
+                            return true;
+                        } else {
+                            console.log('renderFloatingMessages: No messages found, trying again...');
+                            return false;
+                        }
+                    } catch (error) {
+                        console.error('renderFloatingMessages: Error on attempt', attempts, ':', error);
+                        return false;
+                    }
+                }
+                
+                // Try immediately
+                let success = await attemptLoadMessages();
+                
+                // If no success, retry with delays
+                if (!success && attempts < maxAttempts) {
+                    for (let i = 1; i < maxAttempts && !success; i++) {
+                        await new Promise(resolve => setTimeout(resolve, 500 * i));
+                        success = await attemptLoadMessages();
+                    }
+                }
+                
+                // If still no success, load default messages
+                if (!success) {
+                    console.log('renderFloatingMessages: Loading default messages after failed attempts...');
+                    const defaultMessages = [
+                        { name: "Mama 💖", text: "Selamat ulang tahun sayang! Mama bangga sama kamu, tumbuh jadi gadis yang cantik dan bijaksana. Semoga semua mimpi kamu tercapai di usia 23 ini! Lots of love! 💕" },
+                        { name: "Papa 🌟", text: "Happy 23rd Birthday princess! Papa always believe you can achieve anything you set your mind to. Wishing you a year filled with happiness, success, and beautiful memories! 🎉" },
+                        { name: "Sister 👑", text: "To the most amazing sister ever! 🎊 Thank you for always being there, for your infectious laugh, and for being my best friend. Hope this birthday is as wonderful as you are! ✨" },
+                        { name: "Bestie Maya 🎈", text: "SELLA!! 💕🎉 Another year older and still the most incredible person I know. Thank you for being such an amazing friend - your kindness, creativity, and spirit inspire me every day. Here's to celebrating YOU today! 🥳" },
+                        { name: "Coworker Team 🎊", text: "Happy Birthday Sella! 🎂 Working with you is always a joy - your positive energy and dedication make every project better. Wishing you all the happiness in the world on your special day! 💖" },
+                        { name: "Auntie Rose 🌹", text: "Happy 23rd Birthday to my dear niece! 🌸 You bring so much joy to our family with your bright smile and caring heart. May this new year of your life be filled with endless blessings! ✨" }
+                    ];
+                    
+                    try {
+                        // Add default messages to database
+                        for (const msg of defaultMessages) {
+                            await pwaDB.addMessage(msg.name, msg.text);
+                        }
+                        
+                        // Reload and display messages
+                        const updatedMessages = await pwaDB.getAllMessages();
+                        console.log('renderFloatingMessages: Default messages added:', updatedMessages);
+                        displayFloatingMessages(updatedMessages, floatingMessagesList);
+                    } catch (error) {
+                        console.error('renderFloatingMessages: Failed to add default messages:', error);
+                        // Fallback: show messages directly without saving
+                        displayFloatingMessages(defaultMessages, floatingMessagesList);
+                    }
+                }
+                
+            } catch (error) {
+                console.error('renderFloatingMessages: Critical error:', error);
+            }
+        }
+
+
+
+        function displayFloatingMessages(messages, container) {
+            console.log('displayFloatingMessages: Rendering', messages.length, 'messages');
+            
+            // Only update if there are messages to display
+            if (!messages || messages.length === 0) {
+                console.log('displayFloatingMessages: No messages to display');
+                return;
+            }
+            
+            // Check if container already has messages (to avoid overwriting HTML content)
+            const existingMessages = container.querySelectorAll('.floating-message-item');
+            if (existingMessages.length > 0) {
+                console.log('displayFloatingMessages: Messages already displayed in HTML, skipping...');
+                return;
+            }
+            
+            // If no existing messages, add them
+            messages.forEach((msg, index) => {
+                console.log('displayFloatingMessages: Adding message', index + 1, ':', msg);
+                const messageItem = document.createElement('div');
+                messageItem.className = 'floating-message-item';
+                messageItem.style.cssText = 'opacity: 0.9; transform: translateY(0);';
+                messageItem.innerHTML = `
+                    <div class="floating-message-name">${escapeHtml(msg.name)}</div>
+                    <div class="floating-message-text">${escapeHtml(msg.text)}</div>
+                `;
+                container.appendChild(messageItem);
+            });
+            
+            console.log('displayFloatingMessages: Finished adding messages');
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+
+
+        // ============================================
+        // GOOGLE MAPS MODAL MANAGEMENT
+        // ============================================
+        function openMapModal(location) {
+            const mapModal = document.getElementById('mapModal');
+            const mapContainer = document.getElementById('mapContainer');
+            const mapModalTitle = document.getElementById('mapModalTitle');
+            let mapUrl = '';
+            let title = '';
+
+            if (location === 'staycation') {
+                mapUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.668!2d106.8166!3d-6.1944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5374b0c5c77%3A0x7e9e8b1c0c8b8b8b!2sShankee%20Suite%20Sudirman!5e0!3m2!1sen!2sid!4v1640000000000!5m2!1sen!2sid';
+                title = 'Staycation - Shankee Suite (Sudirman)';
+            } else if (location === 'dinner') {
+                mapUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.668!2d106.8166!3d-6.1944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5374b0c5c77%3A0x7e9e8b1c0c8b8b8b!2sBottega%20Ristorante!5e0!3m2!1sen!2sid!4v1640000000000!5m2!1sen!2sid';
+                title = 'Dinner - Bottega Ristorante';
+            }
+
+            mapModalTitle.textContent = title;
+            mapContainer.innerHTML = `<iframe src="${mapUrl}" style="width: 100%; height: 100%; border: none;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+
+            mapModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMapModal() {
+            const mapModal = document.getElementById('mapModal');
+            mapModal.classList.remove('active');
+            document.getElementById('mapContainer').innerHTML = '';
+            document.body.style.overflow = 'auto';
+        }
+
+        // ============================================
+        // PDF VIEWER MODAL MANAGEMENT
+        // ============================================
+        let scrollPosition = 0;
+
+        // ============================================
+        // PDF VIEWER MODAL MANAGEMENT
+        // ============================================
+        function openPdfModal() {
+            const pdfModal = document.getElementById('pdfModal');
+
+            // Simpan posisi scroll SEBELUM scroll ke atas
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            pdfModal.dataset.scrollPosition = scrollPosition;
+
+            // Scroll ke atas DULU sebelum lock body
+            window.scrollTo(0, 0);
+
+            // Tunggu sebentar agar scroll selesai (gunakan requestAnimationFrame)
+            requestAnimationFrame(() => {
+                // Lock scroll di posisi atas
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'fixed';
+                document.body.style.top = '0';
+                document.body.style.width = '100%';
+                document.body.style.left = '0';
+                document.body.style.right = '0';
+
+                // Set display flex DULU (tapi masih opacity 0)
+                pdfModal.style.display = 'flex';
+
+                // Force reflow agar browser render perubahan display
+                void pdfModal.offsetHeight;
+
+                // BARU tambahkan class active (untuk opacity 1)
+                pdfModal.classList.add('active');
+            });
+        }
+
+        function closePdfModal() {
+            const pdfModal = document.getElementById('pdfModal');
+
+            // Ambil scroll position yang disimpan
+            const scrollPosition = parseInt(pdfModal.dataset.scrollPosition || '0');
+
+            // Remove class active dulu (untuk animasi fade out)
+            pdfModal.classList.remove('active');
+
+            // Tunggu animasi selesai (300ms) baru hide
+            setTimeout(() => {
+                pdfModal.style.display = 'none';
+            }, 300);
+
+            // Unlock scroll
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            document.body.style.left = '';
+            document.body.style.right = '';
+
+            // Kembalikan scroll position
+            window.scrollTo(0, scrollPosition);
+        }
+
+        // ============================================
+        // GIFTS MODAL MANAGEMENT
+        // ============================================
+        function openGiftsModal() {
+            document.getElementById('giftsModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGiftsModal() {
+            document.getElementById('giftsModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeGiftsModal();
+                closeMapModal();
+                closePdfModal();
+            }
+        });
+
+        document.getElementById('giftsModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('giftsModal')) {
+                closeGiftsModal();
+            }
+        });
+
+        document.getElementById('mapModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('mapModal')) {
+                closeMapModal();
+            }
+        });
+
+        document.getElementById('pdfModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('pdfModal')) {
+                closePdfModal();
+            }
+        });
+
+        // ============================================
+        // SCROLL TO SECTION
+        // ============================================
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+
+
+        // ============================================
+        // EDIT MESSAGE (ADMIN) - PWA DATABASE MANAGEMENT
+        // ============================================
+        async function editMessage() {
+            const data = await pwaDB.exportAllData();
+            const yaml = pwaDB.convertToYAML(data);
+            const json = JSON.stringify(data, null, 2);
+
+            // Create online viewable URL for the data
+            const dataUrl = 'data:text/yaml;charset=utf-8,' + encodeURIComponent(yaml);
+            const jsonUrl = 'data:application/json;charset=utf-8,' + encodeURIComponent(json);
+
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.style.zIndex = '3000';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 800px;">
+                    <div class="modal-header">
+                        <h3 class="modal-title">PWA Database Management</h3>
+                        <button class="close-btn" onclick="this.closest('.modal').remove()" aria-label="Close">&times;</button>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <p style="margin-bottom: 1rem; color: #6b6b6b;">Your PWA database is automatically backed up and can be accessed online:</p>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <button onclick="downloadFile('${btoa(yaml)}', 'sella-birthday-pwa.yml', 'text/yaml')" class="cta-btn" style="flex: 1; padding: 0.8rem;">Download YAML</button>
+                            <button onclick="downloadFile('${btoa(json)}', 'sella-birthday-pwa.json', 'application/json')" class="cta-btn" style="flex: 1; padding: 0.8rem;">Download JSON</button>
+                            <button onclick="copyToClipboard('${btoa(yaml)}')" class="cta-btn" style="flex: 1; padding: 0.8rem; background: rgba(255,255,255,0.7); color: #2d2d2d; border: 1px solid #E9C9A8;">Copy YAML</button>
+                        </div>
+                        <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="${dataUrl}" target="_blank" class="cta-btn" style="flex: 1; padding: 0.8rem; background: rgba(232, 255, 244, 0.8); color: #2d2d2d; text-decoration: none; display: inline-block; text-align: center;">View Online (YAML)</a>
+                            <a href="${jsonUrl}" target="_blank" class="cta-btn" style="flex: 1; padding: 0.8rem; background: rgba(237, 231, 255, 0.8); color: #2d2d2d; text-decoration: none; display: inline-block; text-align: center;">View Online (JSON)</a>
+                        </div>
+                    </div>
+                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(232, 255, 244, 0.1); border-radius: 8px; border: 1px solid rgba(233, 201, 168, 0.2);">
+                        <h4 style="margin-bottom: 0.5rem; font-family: 'DM Serif Display', serif; color: #2d2d2d;">Real-time Online Database:</h4>
+                        <ul style="margin: 0; padding-left: 1.5rem; color: #6b6b6b; font-size: 0.9rem;">
+                            <li>🌐 <strong>Online Access:</strong> Messages stored in IndexedDB + YAML backup</li>
+                            <li>📱 <strong>Auto-sync:</strong> Every new message updates the database</li>
+                            <li>💾 <strong>Offline First:</strong> Works offline, syncs when online</li>
+                            <li>🔄 <strong>Real-time:</strong> Database updates instantly with new wishes</li>
+                            <li>📊 <strong>Live Count:</strong> <span id="liveMessageCount">${data.app_info.total_messages}</span> messages total</li>
+                            <li>🎯 <strong>Export Ready:</strong> YAML/JSON available for external use</li>
+                        </ul>
+                    </div>
+                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(251, 234, 240, 0.3); border-radius: 8px; border: 1px solid rgba(233, 201, 168, 0.2);">
+                        <h4 style="margin-bottom: 0.5rem; font-family: 'DM Serif Display', serif; color: #2d2d2d;">Latest Messages (${data.app_info.total_messages}):</h4>
+                        <div style="max-height: 200px; overflow-y: auto; font-size: 0.85rem;">
+                            ${data.messages.slice(-3).map(msg => `
+                                <div style="margin-bottom: 0.8rem; padding: 0.8rem; background: rgba(255,255,255,0.6); border-radius: 6px;">
+                                    <strong style="color: #C2185B;">${escapeHtml(msg.name)}</strong>
+                                    <p style="margin: 0.3rem 0 0 0; color: #2d2d2d;">${escapeHtml(msg.text.substring(0, 80))}${msg.text.length > 80 ? '...' : ''}</p>
+                                    <small style="color: #6b6b6b;">${new Date(msg.timestamp).toLocaleString()}</small>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <p style="font-size: 0.85rem; color: #6b6b6b; margin: 1rem 0;">🚀 <strong>Pro Tip:</strong> Install this as a PWA for the best experience! Your data is securely stored locally with automatic online backups. Every new message is instantly added to the database!</p>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.remove();
+            });
+
+            // Update live message count
+            const countElement = document.getElementById('liveMessageCount');
+            if (countElement) {
+                setInterval(async () => {
+                    const latestData = await pwaDB.exportAllData();
+                    countElement.textContent = latestData.app_info.total_messages;
+                }, 5000); // Update every 5 seconds
+            }
+        }
+
+        function downloadFile(base64Data, filename, mimeType) {
+            const data = atob(base64Data);
+            const blob = new Blob([data], { type: mimeType });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            link.click();
+            window.URL.revokeObjectURL(url);
+            showStatus('✅ Downloaded!');
+        }
+
+        function copyToClipboard(base64Data) {
+            const data = atob(base64Data);
+            navigator.clipboard.writeText(data).then(() => {
+                showStatus('📋 Copied to clipboard!');
+            });
+        }
+
+
+
+
+        // ============================================
+        // PAGE INITIALIZATION
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Initialize PWA Database first
+            await initDatabase();
+
+            // Load floating messages IMMEDIATELY (before other operations)
+            await renderFloatingMessages();
+
+            // Initialize gallery
+            await initGallery();
+
+            // Load messages (both regular and floating)
+            await renderMessages();
+
+            // Load post
+            await loadPost();
+
+            // Add keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeGiftsModal();
+                    closeMapModal();
+                    closePdfModal();
+                }
+            });
+
+            // Show initial status
+            showStatus('🎵 Music ready - click to unmute');
+            
+            // Ensure floating messages are visible
+            setTimeout(() => {
+                const floatingSection = document.getElementById('floatingMessages');
+                if (floatingSection) {
+                    floatingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 1000);
+        });
+
+
+        // Add fade-in/out animation for status messages
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                    transform: scale(0.95);
+                }
+            }
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: translateY(-10px); }
+                10% { opacity: 1; transform: translateY(0); }
+                90% { opacity: 1; transform: translateY(0); }
+                100% { opacity: 0; transform: translateY(-10px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>
