@@ -1,0 +1,48 @@
+# .htaccess file for PDF hosting optimization
+# Place this file in the root directory of your website
+
+# Enable CORS for PDF files
+<IfModule mod_headers.c>
+    # Allow PDF files to be loaded in iframes from same origin
+    <Files "*.pdf">
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        Header set Access-Control-Allow-Headers "*"
+        Header set X-Content-Type-Options "nosniff"
+    </Files>
+</IfModule>
+
+# Set correct MIME type for PDF files
+<IfModule mod_mime.c>
+    AddType application/pdf .pdf
+    AddType application/octet-stream .pdf
+</IfModule>
+
+# Compress PDF files for better loading
+<IfModule mod_deflate.c>
+    <Files "*.pdf">
+        SetOutputFilter DEFLATE
+    </Files>
+</IfModule>
+
+# Set cache headers for PDF files
+<IfModule mod_expires.c>
+    <Files "*.pdf">
+        ExpiresActive On
+        ExpiresDefault "access plus 1 month"
+        Header append Cache-Control "public, immutable"
+    </Files>
+</IfModule>
+
+# Security headers for PDF files
+<Files "*.pdf">
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</Files>
+
+# Fallback for servers without mod_mime
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^pdf/.*\.pdf$ - [L,T=application/pdf]
+</IfModule>
