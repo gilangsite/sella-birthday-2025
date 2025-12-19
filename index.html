@@ -56,6 +56,7 @@
             backdrop-filter: blur(1px);
         }
 
+
         /* Navigation & Header */
         header {
             position: sticky;
@@ -130,10 +131,88 @@
             transform: translateY(-2px);
         }
 
-
         .nav-btn:focus {
             outline: 2px solid var(--accent-gold);
             outline-offset: 2px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(233, 201, 168, 0.2);
+        }
+
+        .hamburger-menu:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .hamburger-line {
+            width: 24px;
+            height: 2px;
+            background: var(--accent-gold);
+            margin: 2px 0;
+            transition: all 0.3s ease;
+            border-radius: 1px;
+        }
+
+        .hamburger-menu.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger-menu.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .mobile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 1rem;
+            left: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(var(--blur-strength));
+            border: 1px solid rgba(233, 201, 168, 0.2);
+            border-radius: 15px;
+            padding: 1rem;
+            box-shadow: 0 8px 32px rgba(45, 45, 45, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .mobile-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mobile-dropdown .nav-btn {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 0.5rem;
+            justify-content: center;
+        }
+
+        .mobile-dropdown .nav-btn:last-child {
+            margin-bottom: 0;
         }
 
         /* Music Toggle Button Styling */
@@ -218,9 +297,10 @@
         }
 
 
+
         .post-image {
             width: 100%;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 2564 / 3205;
             background: linear-gradient(135deg, rgba(232, 255, 244, 0.2), rgba(237, 231, 255, 0.2));
             display: flex;
             align-items: center;
@@ -232,7 +312,7 @@
         .post-image img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             background-color: rgba(255, 255, 255, 0.8);
         }
 
@@ -1077,6 +1157,7 @@
         }
 
         /* Responsive Design */
+
         @media (max-width: 1024px) {
             .header-container {
                 flex-wrap: wrap;
@@ -1107,6 +1188,22 @@
 
             .messages-container {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Hide regular navigation buttons on mobile */
+            .nav-buttons {
+                display: none;
+            }
+
+            /* Show mobile navigation */
+            .mobile-nav {
+                display: flex;
+            }
+
+            .hamburger-menu {
+                display: flex;
             }
         }
 
@@ -1831,11 +1928,13 @@
 </head>
 
 <body>
+
     <!-- Header with Navigation -->
     <header>
         <div class="header-container">
             <div class="logo" aria-label="Sella 23">S</div>
 
+            <!-- Desktop Navigation -->
             <div class="nav-buttons">
                 <button class="nav-btn secondary" onclick="scrollToSection('itinerary')" aria-label="See Itinerary">See
                     Itinerary</button>
@@ -1858,6 +1957,37 @@
                         <path d="M17.5 6.5C20 9 20 15 17.5 17.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                 </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav">
+                <!-- Music Toggle Button for Mobile -->
+                <button id="music-toggle-mobile" class="nav-btn music-btn" aria-label="Toggle background music" aria-pressed="true">
+                    <svg id="icon-muted-mobile" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 9L15 15M15 9L9 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M11 5L6 9H3V15H6L11 19V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
+                    <svg id="icon-sound-mobile" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display: none;">
+                        <path d="M11 5L6 9H3V15H6L11 19V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M15 9C16.333 10.333 16.333 13.667 15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M17.5 6.5C20 9 20 15 17.5 17.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+
+                <!-- Hamburger Menu -->
+                <div class="hamburger-menu" onclick="toggleMobileMenu()">
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                    <div class="hamburger-line"></div>
+                </div>
+
+                <!-- Mobile Dropdown -->
+                <div class="mobile-dropdown" id="mobileDropdown">
+                    <button class="nav-btn secondary" onclick="scrollToSection('itinerary'); closeMobileMenu()" aria-label="See Itinerary">See Itinerary</button>
+                    <button class="nav-btn secondary" onclick="scrollToSection('gifts'); closeMobileMenu()" aria-label="View Gifts">View Gifts</button>
+                    <button class="nav-btn primary" onclick="openGiftsModal(); closeMobileMenu()" aria-label="Open Gifts">Open Gifts</button>
+                    <button class="nav-btn secondary" onclick="scrollToSection('floatingMessages'); closeMobileMenu()" aria-label="View Messages">View Messages</button>
+                </div>
             </div>
         </div>
     </header>
@@ -2286,6 +2416,49 @@
                 // Fallback will be handled by the BirthdayPwaDB class
             }
         }
+
+
+        // ============================================
+        // MOBILE NAVIGATION MANAGEMENT
+        // ============================================
+        let isMobileMenuOpen = false;
+
+        function toggleMobileMenu() {
+            const hamburger = document.querySelector('.hamburger-menu');
+            const dropdown = document.getElementById('mobileDropdown');
+            
+            isMobileMenuOpen = !isMobileMenuOpen;
+            
+            if (isMobileMenuOpen) {
+                hamburger.classList.add('active');
+                dropdown.classList.add('active');
+            } else {
+                hamburger.classList.remove('active');
+                dropdown.classList.remove('active');
+            }
+        }
+
+        function closeMobileMenu() {
+            const hamburger = document.querySelector('.hamburger-menu');
+            const dropdown = document.getElementById('mobileDropdown');
+            
+            isMobileMenuOpen = false;
+            hamburger.classList.remove('active');
+            dropdown.classList.remove('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const mobileNav = document.querySelector('.mobile-nav');
+            const hamburger = document.querySelector('.hamburger-menu');
+            const dropdown = document.getElementById('mobileDropdown');
+            
+            if (isMobileMenuOpen && 
+                !mobileNav.contains(e.target) && 
+                !hamburger.contains(e.target)) {
+                closeMobileMenu();
+            }
+        });
 
         // ============================================
         // INSTAGRAM-STYLE POST MANAGEMENT
