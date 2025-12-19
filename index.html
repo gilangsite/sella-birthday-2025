@@ -1458,8 +1458,15 @@
                 gap: 1.5rem;
             }
 
+
             .floating-message-item {
                 padding: 1.2rem;
+                gap: 1rem;
+            }
+
+            .message-profile-photo {
+                width: 50px;
+                height: 50px;
             }
 
             .floating-message-name {
@@ -1660,6 +1667,7 @@
         }
 
 
+
         .floating-message-item {
             backdrop-filter: blur(15px);
             background: rgba(255, 255, 255, 0.8);
@@ -1677,6 +1685,9 @@
             position: relative;
             overflow: hidden;
             filter: opacity(0.8);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
         }
 
         .floating-message-item::before {
@@ -1749,6 +1760,7 @@
             animation-delay: 1.0s, 3.0s;
         }
 
+
         .floating-message-item:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 
@@ -1759,10 +1771,33 @@
             background: rgba(255, 255, 255, 0.85);
         }
 
+        .message-profile-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(194, 24, 91, 0.15);
+            box-shadow: 0 4px 12px rgba(194, 24, 91, 0.1);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .message-profile-photo:hover {
+            transform: scale(1.05);
+            border-color: rgba(194, 24, 91, 0.3);
+            box-shadow: 0 6px 16px rgba(194, 24, 91, 0.15);
+        }
+
+        .message-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+
         .floating-message-name {
             font-weight: 700;
             color: var(--accent-gold);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             font-size: 1.1rem;
             display: flex;
             align-items: center;
@@ -2217,59 +2252,104 @@
             <h2 class="floating-messages-title">Messages from Admire 💌</h2>
             <div class="floating-messages-list" id="floatingMessagesList">
                 <!-- Messages from friends - loaded via JavaScript -->
+
                 <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
-                    <div class="floating-message-name">Sara Pratistha</div>
-                    <div class="floating-message-text">Cellaku yang ndak pernh tua nan ceria selalu, sehat terus dan panjang umur ya non. Terima kasih udah selalu hadir di hidupku dalam moment apapun, semoga Tuhan selalu mempermudah & lancarkan usaha serta citamu. Semoga senantiasa bahagia, penuh kekayaan dan ketenangan, Tuhan selalu lindungi langkahmu dimanapun berada. Semangat terus Cella and happy birthday🤍</div>
+                    <img src="img/sarah.webp" alt="Sara Pratistha" class="message-profile-photo">
+                    <div class="message-content">
+                        <div class="floating-message-name">Sara Pratistha</div>
+
+                        <div class="floating-message-text">Cellaku yang ndak pernh tua nan ceria selalu, sehat terus dan panjang umur ya non. Terima kasih udah selalu hadir di hidupku dalam moment apapun, semoga Tuhan selalu mempermudah & lancarkan usaha serta citamu. Semoga senantiasa bahagia, penuh kekayaan dan ketenangan, Tuhan selalu lindungi langkahmu dimanapun berada. Semangat terus Cella and happy birthday🤍</div>
+                    </div>
                 </div>
                 
+
                 <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
-                    <div class="floating-message-name">Syahrena</div>
-                    <div class="floating-message-text">Happy level up cella!  sehat dan sukses selalu , bersinar di wajah dan karir nya semoga centil nya bertambah tapi lola nya berkurang yaaaa</div>
+                    <img src="img/rena.webp" alt="Syahrena" class="message-profile-photo">
+                    <div class="message-content">
+                        <div class="floating-message-name">Syahrena</div>
+                        <div class="floating-message-text">Happy level up cella!  sehat dan sukses selalu , bersinar di wajah dan karir nya semoga centil nya bertambah tapi lola nya berkurang yaaaa</div>
+                    </div>
                 </div>
                 
+
                 <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
-                    <div class="floating-message-name">Fatimah</div>
-                    <div class="floating-message-text">happy birthday depoyyy.... selalu dilancarkan dalam hal apapun, sehat selalu dan apapun yang kamu panjatkan segera dikabulkan.Aamiin</div>
+                    <img src="img/fatimah.webp" alt="Fatimah" class="message-profile-photo">
+                    <div class="message-content">
+                        <div class="floating-message-name">Fatimah</div>
+                        <div class="floating-message-text">happy birthday depoyyy.... selalu dilancarkan dalam hal apapun, sehat selalu dan apapun yang kamu panjatkan segera dikabulkan.Aamiin</div>
+                    </div>
                 </div>
                 
+
                 <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
-                    <div class="floating-message-name">Muktiah (Imoy)</div>
-                    <div class="floating-message-text">Barakallahu fii umyrik wa hayati fi rezeki devitulllllllll yang cantilitull🌹🌹🫶🏻🫶🏻🫶🏻Berkah dunia wa akhirat .  Qobul segala hajat dunia wa akhirat .. Lancar segala urusan dunia dan akhirat kamu.. banyak² mendapatkan kasih sayang yg tulus dr org² sekitar kamu, dijauhkan dari hal² yg gabaik buat kmu serta dijauhin dr org² yg sirik&jahat sm kamu.. Panjng umur kamu, sehat badan kamu, makin disayang dan dicintai sama ayang kamu ya depooyyy🤍🤍🤍🤍🤍🤍 Emm apalagi ya depooyy,  Intinyaa SELALU BAHAGIA YA DEPOYYY .. 🌹🌹🌹🫶🏻🫶🏻🫶🏻🫶🏻💐💐💐🤍🤍🤍🤍🤍🤍🤍🤍🤍  생일 축하해 데비타 🎂🥳🥳🥳🥳🥳 ILYDEPOYY😽</div>
+                    <img src="img/dika2.webp" alt="Muktiah (Imoy)" class="message-profile-photo">
+                    <div class="message-content">
+                        <div class="floating-message-name">Muktiah (Imoy)</div>
+                        <div class="floating-message-text">Barakallahu fii umyrik wa hayati fi rezeki devitulllllllll yang cantilitull🌹🌹🫶🏻🫶🏻🫶🏻Berkah dunia wa akhirat .  Qobul segala hajat dunia wa akhirat .. Lancar segala urusan dunia dan akhirat kamu.. banyak² mendapatkan kasih sayang yg tulus dr org² sekitar kamu, dijauhkan dari hal² yg gabaik buat kmu serta dijauhin dr org² yg sirik&jahat sm kamu.. Panjng umur kamu, sehat badan kamu, makin disayang dan dicintai sama ayang kamu ya depooyyy🤍🤍🤍🤍🤍🤍 Emm apalagi ya depooyy,  Intinyaa SELALU BAHAGIA YA DEPOYYY .. 🌹🌹🌹🫶🏻🫶🏻🫶🏻🫶🏻💐💐💐🤍🤍🤍🤍🤍🤍🤍🤍🤍  생일 축하해 데비타 🎂🥳🥳🥳🥳🥳 ILYDEPOYY😽</div>
+                    </div>
                 </div>
                 
+
                 <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
-                    <div class="floating-message-name">Bunga Revalina</div>
-                    <div class="floating-message-text">haii mba devita, ucapan dari aku Semoga kisah hidupmu terus ditulis dengan indah. Selamat ulang tahun, teruslah bersinar! Terimakasih sudah mau menjadi bagian teman keluh kesa aku loveyou so much 🥹🫶🏻🥰</div>
+                    <img src="img/reva.webp" alt="Bunga Revalina" class="message-profile-photo">
+                    <div class="message-content">
+                        <div class="floating-message-name">Bunga Revalina</div>
+                        <div class="floating-message-text">haii mba devita, ucapan dari aku Semoga kisah hidupmu terus ditulis dengan indah. Selamat ulang tahun, teruslah bersinar! Terimakasih sudah mau menjadi bagian teman keluh kesa aku loveyou so much 🥹🫶🏻🥰</div>
+                    </div>
                 </div>
                 
+
                 <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
-                    <div class="floating-message-name">Adi Imeng</div>
-                    <div class="floating-message-text">Hallllllllo mba, udah tua aja nihh yee, happy birthday, sililimit iling tihinnnnn yak, Do'anya semoga sehat selalu dan desertai keberkahan, dilancarkan rezekinya dan karir nyaa makin merowkettt yak, gitu ajaaa deh ya mba, satu lagiii deh mba, cepet² merid deh yaa sama massehhhh 🤟🎉🥳🎂</div>
+                    <img src="img/adi.webp" alt="Adi Imeng" class="message-profile-photo">
+                    <div class="message-content">
+                        <div class="floating-message-name">Adi Imeng</div>
+                        <div class="floating-message-text">Hallllllllo mba, udah tua aja nihh yee, happy birthday, sililimit iling tihinnnnn yak, Do'anya semoga sehat selalu dan desertai keberkahan, dilancarkan rezekinya dan karir nyaa makin merowkettt yak, gitu ajaaa deh ya mba, satu lagiii deh mba, cepet² merid deh yaa sama massehhhh 🤟🎉🥳🎂</div>
+                    </div>
                 </div>
                 
+
                 <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
-                    <div class="floating-message-name">Dewi Shinelife</div>
-                    <div class="floating-message-text">Happy Birthday Cantikk, Sehatt selaluu yaa🤗 Karir makin besoknarr 🌈. langgeng terus sama Gilang miss you</div>
+                    <img src="img/dewi2.webp" alt="Dewi Shinelife" class="message-profile-photo">
+                    <div class="message-content">
+                        <div class="floating-message-name">Dewi Shinelife</div>
+                        <div class="floating-message-text">Happy Birthday Cantikk, Sehatt selaluu yaa🤗 Karir makin besoknarr 🌈. langgeng terus sama Gilang miss you</div>
+                    </div>
                 </div>
                 
+
                 <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
-                    <div class="floating-message-name">Andika Chris</div>
-                    <div class="floating-message-text">Haloo Devita, selamat ulang tahun! Semoga di umur ke-23 tahun ini selalu diberikan kesehatann, mental yang kuat dan rezekii sebanyak-banyaknya dan semoga hal-hal baik selalu menyertai!</div>
+                    <img src="img/andika.webp" alt="Andika Chris" class="message-profile-photo">
+                    <div class="message-content">
+                        <div class="floating-message-name">Andika Chris</div>
+                        <div class="floating-message-text">Haloo Devita, selamat ulang tahun! Semoga di umur ke-23 tahun ini selalu diberikan kesehatann, mental yang kuat dan rezekii sebanyak-banyaknya dan semoga hal-hal baik selalu menyertai!</div>
+                    </div>
                 </div>
                 
+
                 <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
-                    <div class="floating-message-name">Iben Alxaitham</div>
-                    <div class="floating-message-text">Halo ka devita, selamat ulang tahun untuk umur ke 23 tahun ka, semoga terus di beri kesehatan, makin cantik, sukses terus🤩🥳🥳🎈🎆</div>
+                    <img src="img/iben.webp" alt="Iben Alxaitham" class="message-profile-photo">
+                    <div class="message-content">
+                        <div class="floating-message-name">Iben Alxaitham</div>
+                        <div class="floating-message-text">Halo ka devita, selamat ulang tahun untuk umur ke 23 tahun ka, semoga terus di beri kesehatan, makin cantik, sukses terus🤩🥳🥳🎈🎆</div>
+                    </div>
                 </div>
                 
+
                 <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
-                    <div class="floating-message-name">Yasmin Nafisah</div>
-                    <div class="floating-message-text">HAPPY BIRTHDAY, DEVITA! May your day be filled with endless love, laughter, and blessing. You deserve all the happiness in the world, and i hope this year brings you closer to your dreams, filled with beautiful moments, good health, and endless happiness. Keep going and growing, wherever you are. Happy birthday one again!</div>
+                    <img src="img/yasmin.webp" alt="Yasmin Nafisah" class="message-profile-photo">
+                    <div class="message-content">
+                        <div class="floating-message-name">Yasmin Nafisah</div>
+                        <div class="floating-message-text">HAPPY BIRTHDAY, DEVITA! May your day be filled with endless love, laughter, and blessing. You deserve all the happiness in the world, and i hope this year brings you closer to your dreams, filled with beautiful moments, good health, and endless happiness. Keep going and growing, wherever you are. Happy birthday one again!</div>
+                    </div>
                 </div>
                 
+
                 <div class="floating-message-item" style="opacity: 0.9; transform: translateY(0);">
-                    <div class="floating-message-name">Dewi Sukmawati</div>
-                    <div class="floating-message-text">Happy birthday, Dev 🎉🤍, ga kerasa kita udah 7 years of friendship dari ketawa random sampai phase hidup yang chaotic tapi we survived it together. thank you for always being there for me, for listening to all my nonsense, and for never leaving no matter how messy things get. inget ga pas jaman gw masih di bekasi wkwkwk, lu bantu gw banget sampe bisa kayak skrg🥹. i hope this new chapter brings you more happiness, peace of mind, and everything good you truly deserve. Please stay being you kind, strong, and genuine, grateful to have you in my life, and hopefully kita masih bareng terus for many more years to come 🫶✨</div>
+                    <img src="img/dewi1.webp" alt="Dewi Sukmawati" class="message-profile-photo">
+                    <div class="message-content">
+                        <div class="floating-message-name">Dewi Sukmawati</div>
+                        <div class="floating-message-text">Happy birthday, Dev 🎉🤍, ga kerasa kita udah 7 years of friendship dari ketawa random sampai phase hidup yang chaotic tapi we survived it together. thank you for always being there for me, for listening to all my nonsense, and for never leaving no matter how messy things get. inget ga pas jaman gw masih di bekasi wkwkwk, lu bantu gw banget sampe bisa kayak skrg🥹. i hope this new chapter brings you more happiness, peace of mind, and everything good you truly deserve. Please stay being you kind, strong, and genuine, grateful to have you in my life, and hopefully kita masih bareng terus for many more years to come 🫶✨</div>
+                    </div>
                 </div>
             </div>
         </div>
