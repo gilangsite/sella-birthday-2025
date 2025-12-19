@@ -2769,8 +2769,10 @@
         // ============================================
         // PDF VIEWER MODAL MANAGEMENT
         // ============================================
+
         function openPdfModal() {
             const pdfModal = document.getElementById('pdfModal');
+            const iframe = pdfModal.querySelector('iframe');
 
             // Simpan posisi scroll SEBELUM scroll ke atas
             const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
@@ -2797,7 +2799,90 @@
 
                 // BARU tambahkan class active (untuk opacity 1)
                 pdfModal.classList.add('active');
+
+                // Enhanced PDF loading with multiple fallbacks
+                loadPdfWithFallbacks(iframe);
             });
+        }
+
+        // Enhanced PDF loading with multiple fallbacks
+        function loadPdfWithFallbacks(iframe) {
+            const pdfPaths = [
+                'pdf/hoodie.pdf',
+                './pdf/hoodie.pdf', 
+                '/pdf/hoodie.pdf',
+                window.location.origin + '/pdf/hoodie.pdf'
+            ];
+
+            let currentPathIndex = 0;
+
+            function tryLoadPdf() {
+                if (currentPathIndex >= pdfPaths.length) {
+                    // All paths failed, show error message
+                    iframe.srcdoc = `
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: #f5f5f5; font-family: 'DM Sans', sans-serif;">
+                            <div style="text-align: center; padding: 2rem; color: #666;">
+                                <div style="font-size: 4rem; margin-bottom: 1rem;">📄</div>
+                                <h3 style="color: #C2185B; margin-bottom: 1rem;">PDF Loading Issue</h3>
+                                <p style="margin-bottom: 1rem; line-height: 1.6;">The PDF file couldn't be loaded from the server.</p>
+                                <p style="font-size: 0.9rem; color: #999;">This might be due to server configuration or file permissions.</p>
+                                <div style="margin-top: 2rem;">
+                                    <button onclick="window.open('pdf/hoodie.pdf', '_blank')" style="
+                                        background: linear-gradient(135deg, #C2185B, #F8BBD9);
+                                        color: white;
+                                        border: none;
+                                        padding: 0.8rem 1.5rem;
+                                        border-radius: 50px;
+                                        font-weight: 600;
+                                        cursor: pointer;
+                                        font-family: 'DM Sans', sans-serif;
+                                    ">Open PDF in New Tab</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    showStatus('❌ PDF loading failed - opening in new tab as fallback');
+                    
+                    // Try to open in new tab after a delay
+                    setTimeout(() => {
+                        window.open('pdf/hoodie.pdf', '_blank');
+                    }, 1000);
+                    return;
+                }
+
+                const path = pdfPaths[currentPathIndex];
+                console.log('Attempting to load PDF from:', path);
+                
+                iframe.onload = () => {
+                    console.log('PDF loaded successfully from:', path);
+                };
+                
+                iframe.onerror = () => {
+                    console.warn('Failed to load PDF from:', path);
+                    currentPathIndex++;
+                    setTimeout(tryLoadPdf, 500); // Try next path after 500ms
+                };
+
+                // Set timeout for loading
+                setTimeout(() => {
+                    if (!iframe.contentDocument || iframe.contentDocument.body.innerHTML.trim() === '') {
+                        iframe.onerror();
+                    }
+                }, 3000);
+
+                iframe.src = path;
+            }
+
+            // Check if iOS Safari - skip iframe for better compatibility
+            const isIOSSafari = /iPad|iPhone|iPod/.test(navigator.userAgent) && /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+            
+            if (isIOSSafari) {
+                console.log('iOS Safari detected - opening PDF in new tab');
+                window.open('pdf/hoodie.pdf', '_blank');
+                return;
+            }
+
+            tryLoadPdf();
         }
 
         function closePdfModal() {
