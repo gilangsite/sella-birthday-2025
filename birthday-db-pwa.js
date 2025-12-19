@@ -1,6 +1,7 @@
+
 /**
  * Sella 23 Birthday PWA Database System
- * Handles local storage with auto-backup to YAML files
+ * Handles local storage with Supabase integration and auto-backup to YAML files
  */
 
 class BirthdayPwaDB {
@@ -13,19 +14,34 @@ class BirthdayPwaDB {
         this.fileSystemHandle = null;
         this.isServiceWorkerReady = false;
         
+        // Supabase configuration
+        this.supabaseUrl = 'https://zffdnuknupsgjernadbm.supabase.co';
+        this.supabaseAnonKey = 'sb_publishable_fK56BOAzc_5be1yoye0ZKQ_1ulUs-Gq';
+        this.supabase = null;
+        this.isOnline = navigator.onLine;
+        this.lastSyncTime = null;
+        this.syncInterval = 30000; // 30 seconds
+        this.syncTimer = null;
+        
         this.init();
     }
 
+
     async init() {
         try {
+            // Initialize Supabase first
+            await this.initSupabase();
+            
             await this.openDB();
             await this.registerServiceWorker();
             await this.setupFileSystem();
             this.loadPrePopulatedData();
             this.startAutoBackup();
+            this.startSyncTimer();
             this.setupEventListeners();
+            this.setupOnlineOfflineHandlers();
             
-            console.log('PWA Database initialized successfully');
+            console.log('PWA Database with Supabase integration initialized successfully');
         } catch (error) {
             console.error('Failed to initialize PWA Database:', error);
             this.fallbackToLocalStorage();
@@ -195,11 +211,191 @@ class BirthdayPwaDB {
                 });
                 console.log('Pre-populated messages added');
             }
+
         });
     }
 
-    // Message operations
-    async addMessage(name, text) {
+    // ============================================
+    // SUPABASE INTEGRATION METHODS
+    // ============================================
+
+    /**
+     * Initialize Supabase client
+     */
+    async initSupabase() {
+        try {
+            // Wait for Supabase library to be loaded
+            if (typeof window.supabase === 'undefined') {
+                console.warn('Supabase library not loaded yet, retrying...');
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                if (typeof window.supabase === 'undefined') {
+                    throw new Error('Supabase library not available');
+                }
+            }
+
+            this.supabase = window.supabase.createClient(this.supabaseUrl, this.supabaseAnonKey);
+            console.log('Supabase client initialized');
+            
+            // Test connection
+            const { data, error } = await this.supabase.from('wishes').select('count').limit(1);
+            if (error) {
+                console.warn('Supabase connection test failed:', error);
+            } else {
+                console.log('Supabase connection successful');
+            }
+        } catch (error) {
+            console.warn('Failed to initialize Supabase:', error);
+            this.supabase = null;
+        }
+    }
+
+    /**
+     * Send wish to Supabase database
+     */
+    async sendWishToSupabase(name, message) {
+        if (!this.supabase) {
+            throw new Error('Supabase not initialized');
+        }
+
+        try {
+            const { data, error } = await this.supabase
+                .from('wishes')
+                .insert([
+                    {
+                        name: name.trim(),
+                        message: message.trim(),
+                        created_at: new Date().toISOString()
+                    }
+                ])
+                .select();
+
+            if (error) {
+                console.error('Supabase insert error:', error);
+                throw error;
+            }
+
+            console.log('Wish sent to Supabase successfully:', data);
+            this.lastSyncTime = new Date().toISOString();
+            return data;
+        } catch (error) {
+            console.error('sendWishToSupabase error:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Load wishes from Supabase database
+     */
+    async loadWishesFromSupabase() {
+        if (!this.supabase) {
+            throw new Error('Supabase not initialized');
+        }
+
+        try {
+            const { data, error } = await this.supabase
+                .from('wishes')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error('Supabase select error:', error);
+                throw error;
+            }
+
+            console.log('Wishes loaded from Supabase:', data);
+            return data || [];
+        } catch (error) {
+            console.error('loadWishesFromSupabase error:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Check if online and Supabase is available
+     */
+    isOnlineAndSupabaseAvailable() {
+        return this.isOnline && this.supabase;
+    }
+
+    /**
+     * Setup online/offline event handlers
+     */
+    setupOnlineOfflineHandlers() {
+        window.addEventListener('online', async () => {
+            console.log('App is back online');
+            this.isOnline = true;
+            await this.initSupabase(); // Reinitialize if needed
+            await this.syncWithSupabase(); // Sync when coming back online
+        });
+
+        window.addEventListener('offline', () => {
+            console.log('App is offline');
+            this.isOnline = false;
+        });
+
+        // Update online status on init
+        this.isOnline = navigator.onLine;
+    }
+
+    /**
+     * Start sync timer for periodic Supabase sync
+     */
+    startSyncTimer() {
+        if (this.syncTimer) {
+            clearInterval(this.syncTimer);
+        }
+
+        this.syncTimer = setInterval(async () => {
+            if (this.isOnlineAndSupabaseAvailable()) {
+                try {
+                    await this.syncWithSupabase();
+                } catch (error) {
+                    console.warn('Periodic sync failed:', error);
+                }
+            }
+        }, this.syncInterval);
+    }
+
+    /**
+     * Sync local database with Supabase
+     */
+    async syncWithSupabase() {
+        if (!this.isOnlineAndSupabaseAvailable()) {
+            console.log('Skipping sync - offline or Supabase unavailable');
+            return;
+        }
+
+        try {
+            // Get latest wishes from Supabase
+            const supabaseWishes = await this.loadWishesFromSupabase();
+            
+            // Get local wishes
+            const localMessages = await this.getAllMessages();
+            
+            // Simple sync: add any new wishes from Supabase to local database
+            // (assuming local database might be behind)
+            for (const supabaseWish of supabaseWishes) {
+                const exists = localMessages.find(local => 
+                    local.name === supabaseWish.name && 
+                    local.text === supabaseWish.message
+                );
+                
+                if (!exists) {
+                    await this.addMessageToLocal(supabaseWish.name, supabaseWish.message);
+                }
+            }
+
+            this.lastSyncTime = new Date().toISOString();
+            console.log('Sync with Supabase completed');
+        } catch (error) {
+            console.warn('Sync with Supabase failed:', error);
+        }
+    }
+
+    /**
+     * Add message to local database only (for sync)
+     */
+    async addMessageToLocal(name, text) {
         const message = {
             name: name.trim(),
             text: text.trim(),
@@ -211,15 +407,74 @@ class BirthdayPwaDB {
             const store = transaction.objectStore('messages');
             const request = store.add(message);
 
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+        });
+    }
+
+
+    // Message operations
+    async addMessage(name, text) {
+        // Save to local database first
+        const message = {
+            name: name.trim(),
+            text: text.trim(),
+            timestamp: new Date().toISOString()
+        };
+
+        // Save to local database
+        const localResult = await new Promise((resolve, reject) => {
+            const transaction = this.db.transaction(['messages'], 'readwrite');
+            const store = transaction.objectStore('messages');
+            const request = store.add(message);
+
             request.onsuccess = () => {
                 this.triggerBackup();
                 resolve(request.result);
             };
             request.onerror = () => reject(request.error);
         });
+
+        // Try to send to Supabase (don't wait for it)
+        this.sendToSupabaseAsync(name, text).catch(error => {
+            console.warn('Failed to send to Supabase (will retry):', error);
+        });
+
+        return localResult;
     }
 
+    /**
+     * Send message to Supabase asynchronously (fire and forget)
+     */
+    async sendToSupabaseAsync(name, text) {
+        if (!this.isOnlineAndSupabaseAvailable()) {
+            console.log('Skipping Supabase send - offline or unavailable');
+            return;
+        }
+
+        try {
+            await this.sendWishToSupabase(name, text);
+            console.log('Message sent to Supabase successfully');
+        } catch (error) {
+            console.warn('Failed to send message to Supabase:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Enhanced getAllMessages with Supabase integration
+     */
     async getAllMessages() {
+        try {
+            // If online and Supabase available, try to sync first
+            if (this.isOnlineAndSupabaseAvailable()) {
+                await this.syncWithSupabase();
+            }
+        } catch (error) {
+            console.warn('Failed to sync with Supabase, using local only:', error);
+        }
+
+        // Always get from local database as fallback
         return new Promise((resolve, reject) => {
             const transaction = this.db.transaction(['messages'], 'readonly');
             const store = transaction.objectStore('messages');
@@ -228,6 +483,18 @@ class BirthdayPwaDB {
             request.onsuccess = () => resolve(request.result);
             request.onerror = () => reject(request.error);
         });
+    }
+
+
+    /**
+     * Get messages from Supabase (for external use)
+     */
+    async getMessagesFromSupabase() {
+        if (!this.isOnlineAndSupabaseAvailable()) {
+            throw new Error('Supabase not available or offline');
+        }
+
+        return await this.loadWishesFromSupabase();
     }
 
     // Post operations
