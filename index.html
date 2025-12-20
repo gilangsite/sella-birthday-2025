@@ -2886,21 +2886,8 @@
 
 
         // ============================================
-        // ENHANCED UNIFIED AUDIO SYSTEM - MOBILE & DESKTOP OPTIMIZED
+        // SIMPLIFIED MOBILE AUDIO FIX - AGGRESSIVE & DIRECT
         // ============================================
-        /*
-         * Enhanced Mobile Audio Features:
-         * 1. Comprehensive mobile browser detection
-         * 2. Unified audio system for desktop and mobile
-         * 3. Robust error handling and user feedback
-         * 4. Mobile-first audio player widget
-         * 5. Cross-browser compatibility (iOS Safari, Android Chrome, etc.)
-         * 6. Single source of truth for audio state
-         * 7. Proper synchronization between all audio controls
-         * 8. Enhanced mobile audio player widget
-         * 9. Better user interaction management
-         * 10. Improved error handling and recovery
-         */
 
         // Audio elements and controls
         const audio = document.getElementById('background-music');
@@ -2915,395 +2902,130 @@
         const iconSoundMobile = document.getElementById('icon-sound-mobile');
         const audioStatus = document.getElementById('audioStatus');
 
-        // Enhanced mobile browser detection
+        // Simple mobile detection
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        const isIOSSafari = /iPad|iPhone|iPod/.test(navigator.userAgent) && /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
-        const isAndroidChrome = /Android/.test(navigator.userAgent) && /Chrome/.test(navigator.userAgent);
-        const isSamsungInternet = /SamsungBrowser/.test(navigator.userAgent);
-        const isFirefoxMobile = /Firefox/i.test(navigator.userAgent) && /Mobile/i.test(navigator.userAgent);
 
-        // Audio state management
+        // Simple audio state
         let isMuted = true;
-        let userHasInteracted = false;
         let audioReady = false;
-        let audioInitialized = false;
-        let audioUnlockAttempted = false;
-        let audioLoadingAttempts = 0;
-        const MAX_AUDIO_LOAD_ATTEMPTS = 3;
-        
-        // Mobile-specific audio settings
-        const MOBILE_AUDIO_SETTINGS = {
-            volume: isMobile ? 0.8 : 0.6,
-            preload: 'auto',
-            loop: true,
-            muted: true, // Start muted for autoplay compliance
-        };
 
-
-        // Unified audio initialization with enhanced mobile support
+        // Initialize audio - SIMPLIFIED
         function initializeAudio() {
-            console.log('🎵 Initializing unified audio system...');
+            console.log('🎵 Initializing SIMPLIFIED mobile audio system...');
             
-            // Set optimal audio properties
-            audio.volume = isMobile ? 0.7 : 0.6; // Higher volume for mobile
+            // Set basic audio properties
+            audio.volume = 0.8; // Higher volume for mobile
             audio.loop = true;
+            audio.muted = true;
             audio.preload = 'auto';
-            audio.muted = true; // Start muted for autoplay compliance
             
-            // Enhanced mobile-specific audio settings
-            if (isMobile) {
-                // iOS Safari specific
-                if (isIOSSafari) {
-                    audio.setAttribute('webkit-playsinline', 'true');
-                    audio.setAttribute('playsinline', 'true');
-                }
-                // Android Chrome specific
-                if (isAndroidChrome) {
-                    audio.setAttribute('x5-playsinline', 'true');
-                    audio.setAttribute('x5-video-player-type', 'h5');
-                }
-                // Samsung Internet specific
-                if (isSamsungInternet) {
-                    audio.setAttribute('x5-playsinline', 'true');
-                }
-            }
-            
-            // Add comprehensive event listeners
-            audio.addEventListener('loadstart', () => {
-                console.log('🎵 Audio loading started');
-            });
-            
-            audio.addEventListener('loadeddata', () => {
-                console.log('🎵 Audio data loaded');
-            });
-            
+            // Simple audio ready detection
             audio.addEventListener('canplay', () => {
                 audioReady = true;
                 console.log('🎵 Audio ready to play');
-                updateAudioStatus('Ready to play');
-            });
-            
-            audio.addEventListener('canplaythrough', () => {
-                audioReady = true;
-                console.log('🎵 Audio ready to play completely');
-                updateAudioStatus('Ready to play');
+                if (audioStatus) {
+                    audioStatus.textContent = 'Ready to play';
+                }
             });
             
             audio.addEventListener('playing', () => {
                 console.log('🎵 Audio is now playing');
-                updateAudioStatus('Playing...');
+                if (audioStatus) {
+                    audioStatus.textContent = 'Playing...';
+                }
             });
             
             audio.addEventListener('pause', () => {
                 console.log('🎵 Audio paused');
-                updateAudioStatus('Paused');
-            });
-            
-            audio.addEventListener('ended', () => {
-                console.log('🎵 Audio ended');
-                if (!audio.loop) {
-                    updateAudioStatus('Ended');
+                if (audioStatus) {
+                    audioStatus.textContent = 'Paused';
                 }
             });
             
-            // Enhanced error handling
             audio.addEventListener('error', (e) => {
-                console.error('🎵 Audio loading error:', e);
-                handleAudioError(e);
+                console.error('🎵 Audio error:', e);
+                showStatus('❌ Audio error - tap button again');
             });
             
-            audio.addEventListener('stalled', () => {
-                console.warn('🎵 Audio stalled - attempting recovery');
-                handleAudioStall();
-            });
-            
-            audio.addEventListener('suspend', () => {
-                console.warn('🎵 Audio suspended');
-            });
-            
-            audio.addEventListener('abort', () => {
-                console.warn('🎵 Audio loading aborted');
-            });
-            
-            // Initialize state
-            audioInitialized = true;
-            isMuted = true;
-            
-            // Show initial status
-            if (isMobile) {
-                showStatus('📱 Tap music button to start audio');
-                updateAudioStatus('Tap to play');
-            } else {
-                showStatus('🎵 Music ready - click to unmute');
-                updateAudioStatus('Ready to play');
-            }
-            
-            console.log('🎵 Unified audio system initialized');
+            console.log('🎵 Simplified audio system initialized');
         }
 
-        function updateAudioStatus(status) {
-            if (audioStatus) {
-                audioStatus.textContent = status;
-            }
-        }
-
-        function handleAudioError(error) {
-            let errorMessage = '❌ Audio error';
-            let suggestion = '';
+        // CRITICAL: Direct audio play function for mobile
+        function playAudioDirect() {
+            console.log('🎵 Attempting direct audio play...');
             
-            if (error && error.target && error.target.error) {
-                const errorCode = error.target.error.code;
-                
-                switch (errorCode) {
-                    case MediaError.MEDIA_ERR_ABORTED:
-                        errorMessage = '⏹️ Audio loading aborted';
-                        break;
-                    case MediaError.MEDIA_ERR_NETWORK:
-                        errorMessage = '🌐 Network error - check connection';
-                        suggestion = 'Make sure you have internet connection';
-                        break;
-                    case MediaError.MEDIA_ERR_DECODE:
-                        errorMessage = '🔧 Audio format not supported';
-                        suggestion = 'Try refreshing the page';
-                        break;
-                    case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
-                        errorMessage = '📁 Audio file not found';
-                        suggestion = 'Check if music/hbd.mp3 exists';
-                        break;
-                    default:
-                        errorMessage = '❌ Unknown audio error';
-                }
-            }
+            // Force unmute
+            audio.muted = false;
             
-            showStatus(errorMessage);
+            // Set higher volume for mobile
+            audio.volume = 0.8;
             
-            if (suggestion) {
-                setTimeout(() => {
-                    showStatus('💡 ' + suggestion);
-                }, 2000);
-            }
-            
-            // Mobile-specific guidance
-            if (isMobile) {
-                setTimeout(() => {
-                    showStatus('📱 Mobile: Tap & hold music button');
-                }, 3000);
-            }
-        }
-
-        function handleAudioStall() {
-            if (!audio.paused && audioReady) {
-                console.log('🔄 Attempting to recover from audio stall...');
-                // Try to reload and resume
-                audio.load();
-                setTimeout(() => {
-                    if (!audio.muted) {
-                        audio.play().catch(err => {
-                            console.warn('🔄 Recovery failed:', err);
-                        });
-                    }
-                }, 500);
-            }
-        }
-
-        // Mobile-optimized audio play function
-        function playAudioMobile() {
+            // Direct play attempt
             const playPromise = audio.play();
             
             if (playPromise !== undefined) {
                 playPromise.then(() => {
-                    console.log('Audio playing successfully');
-                    if (isMobile) {
-                        showStatus('🎵 Music playing on mobile');
-                    }
+                    console.log('✅ DIRECT PLAY SUCCESS - Audio is now playing!');
+                    showStatus('🎵 Music playing!');
+                    isMuted = false;
+                    updateAllButtons();
                 }).catch(error => {
-                    console.error('Playback failed:', error);
-                    handlePlaybackError(error);
+                    console.error('❌ Direct play failed:', error);
+                    if (error.name === 'NotAllowedError') {
+                        showStatus('🔇 Tap music button to enable audio');
+                    } else {
+                        showStatus('❌ Audio error - try again');
+                    }
                 });
             }
         }
 
-        function handlePlaybackError(error) {
-            let errorMessage = '❌ Playback failed';
-            
-            if (error.name === 'NotAllowedError') {
-                errorMessage = '🔇 Tap music button to enable audio';
-            } else if (error.name === 'NotSupportedError') {
-                errorMessage = '❌ Audio format not supported';
-            } else if (error.name === 'AbortError') {
-                errorMessage = '⚠️ Audio playback interrupted';
-            }
-            
-            showStatus(errorMessage);
-        }
-
-
-        // Enhanced mobile audio toggle function
+        // SIMPLIFIED toggle function
         function toggleAudio() {
+            console.log('🎵 Toggle audio called, isMuted:', isMuted);
+            
             if (isMuted) {
-                // Ensure we have user interaction for mobile
-                userHasInteracted = true;
-                
-                // Set volume higher for mobile
-                if (isMobile) {
-                    audio.volume = 0.8;
-                }
-                
-                // Critical mobile audio fix: Unmute and play
-                audio.muted = false;
-                
-                // Force audio play for mobile with comprehensive error handling
-                if (isMobile) {
-                    // Add small delay for mobile audio initialization
-                    setTimeout(() => {
-                        audio.play().then(() => {
-                            console.log('🎵 Mobile audio playing successfully');
-                            showStatus('🎵 Music playing...');
-                        }).catch(error => {
-                            console.error('🎵 Mobile audio play failed:', error);
-                            // If play fails, show user what to do
-                            if (error.name === 'NotAllowedError') {
-                                showStatus('🔇 Tap music button to enable audio');
-                            } else {
-                                showStatus('❌ Audio error - try again');
-                            }
-                        });
-                    }, 100);
-                } else {
-                    // Desktop audio
-                    playAudioMobile();
-                    showStatus('🎵 Music playing...');
-                }
-                
+                // PLAY AUDIO
+                playAudioDirect();
             } else {
-                // Mute audio properly for mobile
+                // STOP AUDIO
                 audio.pause();
                 audio.muted = true;
+                isMuted = true;
                 showStatus('🔇 Music muted');
+                updateAllButtons();
+            }
+        }
+
+        // Update all button states
+        function updateAllButtons() {
+            // Desktop button
+            if (iconMuted && iconSound) {
+                if (isMuted) {
+                    iconMuted.style.display = 'block';
+                    iconSound.style.display = 'none';
+                    if (toggleBtn) toggleBtn.setAttribute('aria-pressed', 'false');
+                } else {
+                    iconMuted.style.display = 'none';
+                    iconSound.style.display = 'block';
+                    if (toggleBtn) toggleBtn.setAttribute('aria-pressed', 'true');
+                }
             }
             
-            // Sync both toggle buttons
-            syncAllToggles();
-            isMuted = !isMuted;
-        }
-
-        // Initialize audio
-        initializeAudio();
-
-        // For mobile: wait for first user interaction before attempting autoplay
-        if (isMobile) {
-            // Don't attempt autoplay immediately on mobile
-            console.log('Mobile detected - waiting for user interaction');
-            showStatus('📱 Tap music button to start');
-            
-            // Add touch/click listeners for mobile
-            let firstInteractionHandler = () => {
-                userHasInteracted = true;
-                if (audioReady && !audio.paused) {
-                    audio.play().catch(error => {
-                        console.log('Autoplay prevented (expected on mobile):', error);
-                    });
-                }
-                // Remove listeners after first interaction
-                document.removeEventListener('touchstart', firstInteractionHandler);
-                document.removeEventListener('click', firstInteractionHandler);
-            };
-            
-            document.addEventListener('touchstart', firstInteractionHandler, { once: true });
-            document.addEventListener('click', firstInteractionHandler, { once: true });
-            
-        } else {
-            // Desktop: attempt autoplay with muted
-            audio.play().then(() => {
-                console.log('Background music autoplay started (muted)');
-                showStatus('🎵 Music ready - click to unmute');
-            }).catch(error => {
-                console.log('Autoplay prevented:', error);
-                showStatus('🔇 Click music button to start');
-            });
-        }
-
-
-        // Main toggle event listener
-        toggleBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            toggleAudio();
-            updateMobileToggle(); // Sync mobile button state
-        });
-
-        // Mobile toggle button event listener
-        if (mobileToggleBtn) {
-            mobileToggleBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                toggleAudio();
-                updateDesktopToggle(); // Sync desktop button state
-            });
-
-            // Mobile touch support
-            mobileToggleBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                toggleAudio();
-                updateDesktopToggle();
-            });
-        }
-
-        // CRITICAL FIX: Add missing event listeners for speakerBtn
-        if (speakerBtn) {
-            speakerBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                toggleAudio();
-                syncAllToggles(); // Sync all toggle states
-            });
-
-            // Mobile touch support for speaker button
-            speakerBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                toggleAudio();
-                syncAllToggles();
-            });
-        }
-
-        // Additional mobile touch support for desktop button
-        if (isMobile) {
-            toggleBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                toggleAudio();
-                updateMobileToggle();
-            });
-        }
-
-        function updateMobileToggle() {
-            if (mobileToggleBtn && iconMutedMobile && iconSoundMobile) {
+            // Mobile button
+            if (iconMutedMobile && iconSoundMobile) {
                 if (isMuted) {
                     iconMutedMobile.style.display = 'block';
                     iconSoundMobile.style.display = 'none';
-                    mobileToggleBtn.setAttribute('aria-pressed', 'false');
+                    if (mobileToggleBtn) mobileToggleBtn.setAttribute('aria-pressed', 'false');
                 } else {
                     iconMutedMobile.style.display = 'none';
                     iconSoundMobile.style.display = 'block';
-                    mobileToggleBtn.setAttribute('aria-pressed', 'true');
+                    if (mobileToggleBtn) mobileToggleBtn.setAttribute('aria-pressed', 'true');
                 }
             }
-        }
-
-        function updateDesktopToggle() {
-            if (isMuted) {
-                iconMuted.style.display = 'block';
-                iconSound.style.display = 'none';
-                toggleBtn.setAttribute('aria-pressed', 'false');
-            } else {
-                iconMuted.style.display = 'none';
-                iconSound.style.display = 'block';
-                toggleBtn.setAttribute('aria-pressed', 'true');
-            }
-        }
-
-        // Enhanced sync function to handle all buttons including speakerBtn
-        function syncAllToggles() {
-            updateDesktopToggle();
-            updateMobileToggle();
             
-            // Update speaker button visual state
+            // Speaker button
             if (speakerBtn) {
                 if (isMuted) {
                     speakerBtn.classList.remove('playing');
@@ -3313,40 +3035,69 @@
             }
         }
 
-        // Enhanced audio events for better mobile support
-        audio.addEventListener('ended', () => {
-            if (!audio.loop) {
-                console.log('Audio ended');
-            }
-        });
+        // Initialize audio
+        initializeAudio();
 
-        audio.addEventListener('pause', () => {
-            if (isMobile && !audio.muted) {
-                console.log('Audio paused on mobile');
-            }
-        });
+        // SIMPLE event listeners for ALL audio buttons
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('🎵 Desktop toggle clicked');
+                toggleAudio();
+            });
+        }
 
-        audio.addEventListener('playing', () => {
-            console.log('Audio is now playing');
-        });
+        if (mobileToggleBtn) {
+            mobileToggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('🎵 Mobile toggle clicked');
+                toggleAudio();
+            });
+        }
 
-        // Page visibility API for mobile background handling
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                // Page is hidden, audio might pause on mobile
-                if (!audio.muted && !audio.paused) {
-                    console.log('Page hidden - audio may pause on mobile');
-                }
-            } else {
-                // Page is visible again
-                if (!audio.muted && audio.paused) {
-                    console.log('Page visible - resuming audio');
-                    audio.play().catch(error => {
-                        console.log('Resume failed (expected on mobile):', error);
-                    });
-                }
+        if (speakerBtn) {
+            speakerBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('🎵 Speaker button clicked');
+                toggleAudio();
+            });
+        }
+
+        // Mobile touch support for all buttons
+        if (isMobile) {
+            if (toggleBtn) {
+                toggleBtn.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    console.log('🎵 Desktop toggle touch');
+                    toggleAudio();
+                });
             }
-        });
+            
+            if (mobileToggleBtn) {
+                mobileToggleBtn.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    console.log('🎵 Mobile toggle touch');
+                    toggleAudio();
+                });
+            }
+            
+            if (speakerBtn) {
+                speakerBtn.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    console.log('🎵 Speaker button touch');
+                    toggleAudio();
+                });
+            }
+        }
+
+        // Initial status
+        if (isMobile) {
+            showStatus('📱 Tap music button to start');
+        } else {
+            showStatus('🎵 Click music button to start');
+        }
+        
+        updateAllButtons();
 
         // ============================================
         // GALLERY MANAGEMENT
