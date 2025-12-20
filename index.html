@@ -2661,10 +2661,10 @@
 
 
 
-    <!-- Enhanced Mobile-Optimized Background Music Audio Element -->
+    <!-- Mobile-Optimized Background Music Audio Element -->
     <!-- 
-        Enhanced Mobile Audio Compatibility Features:
-        - Multiple audio sources for better browser support (MP3, AAC, OGG)
+        Fixed Mobile Audio Compatibility Features:
+        - Only existing audio sources for reliable loading (MP3, AAC, OGG)
         - Enhanced preload strategy for mobile devices
         - Proper muted handling for autoplay compliance
         - Cross-browser compatibility (iOS Safari, Android Chrome, Samsung Internet, etc.)
@@ -2688,12 +2688,10 @@
         style="display: none;"
         data-mobile-optimized="true"
     >
-        <!-- Enhanced audio sources for maximum mobile compatibility -->
-        <source src="music/hbd.m4a" type="audio/mp4">
-        <source src="music/hbd.aac" type="audio/aac">
+        <!-- Fixed audio sources - only existing files for reliable mobile loading -->
         <source src="music/hbd.mp3" type="audio/mpeg">
+        <source src="music/hbd.aac" type="audio/aac">
         <source src="music/hbd.ogg" type="audio/ogg">
-        <source src="music/hbd.wav" type="audio/wav">
         <!-- Fallback for browsers that don't support audio element -->
         <div style="display: none;">
             Your browser does not support the audio element.
@@ -3140,7 +3138,7 @@
         }
 
 
-        // Enhanced toggle function for mobile with sync
+        // Enhanced mobile audio toggle function
         function toggleAudio() {
             if (isMuted) {
                 // Ensure we have user interaction for mobile
@@ -3148,33 +3146,38 @@
                 
                 // Set volume higher for mobile
                 if (isMobile) {
-                    audio.volume = 0.7;
+                    audio.volume = 0.8;
                 }
                 
+                // Critical mobile audio fix: Unmute and play
                 audio.muted = false;
                 
-                // For mobile, always try to play when unmuting
-                if (isMobile || audio.paused) {
-                    playAudioMobile();
-                }
-                
-                // Add visual feedback for mobile
+                // Force audio play for mobile with comprehensive error handling
                 if (isMobile) {
-                    toggleBtn.style.transform = 'scale(0.95)';
-                    if (mobileToggleBtn) {
-                        mobileToggleBtn.style.transform = 'scale(0.95)';
-                    }
+                    // Add small delay for mobile audio initialization
                     setTimeout(() => {
-                        toggleBtn.style.transform = 'scale(1)';
-                        if (mobileToggleBtn) {
-                            mobileToggleBtn.style.transform = 'scale(1)';
-                        }
-                    }, 150);
+                        audio.play().then(() => {
+                            console.log('🎵 Mobile audio playing successfully');
+                            showStatus('🎵 Music playing...');
+                        }).catch(error => {
+                            console.error('🎵 Mobile audio play failed:', error);
+                            // If play fails, show user what to do
+                            if (error.name === 'NotAllowedError') {
+                                showStatus('🔇 Tap music button to enable audio');
+                            } else {
+                                showStatus('❌ Audio error - try again');
+                            }
+                        });
+                    }, 100);
+                } else {
+                    // Desktop audio
+                    playAudioMobile();
+                    showStatus('🎵 Music playing...');
                 }
                 
-                showStatus('🎵 Music playing...');
             } else {
-                // Mute audio
+                // Mute audio properly for mobile
+                audio.pause();
                 audio.muted = true;
                 showStatus('🔇 Music muted');
             }
@@ -3228,8 +3231,46 @@
             updateMobileToggle(); // Sync mobile button state
         });
 
-
         // Mobile toggle button event listener
+        if (mobileToggleBtn) {
+            mobileToggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleAudio();
+                updateDesktopToggle(); // Sync desktop button state
+            });
+
+            // Mobile touch support
+            mobileToggleBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                toggleAudio();
+                updateDesktopToggle();
+            });
+        }
+
+        // CRITICAL FIX: Add missing event listeners for speakerBtn
+        if (speakerBtn) {
+            speakerBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleAudio();
+                syncAllToggles(); // Sync all toggle states
+            });
+
+            // Mobile touch support for speaker button
+            speakerBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                toggleAudio();
+                syncAllToggles();
+            });
+        }
+
+        // Additional mobile touch support for desktop button
+        if (isMobile) {
+            toggleBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                toggleAudio();
+                updateMobileToggle();
+            });
+        }
 
         function updateMobileToggle() {
             if (mobileToggleBtn && iconMutedMobile && iconSoundMobile) {
@@ -3257,35 +3298,19 @@
             }
         }
 
-        // Sync both toggles when audio state changes
+        // Enhanced sync function to handle all buttons including speakerBtn
         function syncAllToggles() {
             updateDesktopToggle();
             updateMobileToggle();
-        }
-
-        // Mobile toggle event listeners
-        if (mobileToggleBtn) {
-            mobileToggleBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                toggleAudio();
-                updateDesktopToggle(); // Sync desktop button state
-            });
-
-            // Mobile touch support
-            mobileToggleBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                toggleAudio();
-                updateDesktopToggle();
-            });
-        }
-
-        // Additional mobile touch support for desktop button
-        if (isMobile) {
-            toggleBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                toggleAudio();
-                updateMobileToggle();
-            });
+            
+            // Update speaker button visual state
+            if (speakerBtn) {
+                if (isMuted) {
+                    speakerBtn.classList.remove('playing');
+                } else {
+                    speakerBtn.classList.add('playing');
+                }
+            }
         }
 
         // Enhanced audio events for better mobile support
