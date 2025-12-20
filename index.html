@@ -2406,22 +2406,29 @@
 
 
 
-    <!-- Background Music Audio Element -->
+
+    <!-- Mobile-Optimized Background Music Audio Element -->
     <!-- 
-        Browser Autoplay Behavior:
-        - Modern browsers block autoplay with sound for user experience
-        - Autoplay with muted audio is generally allowed
-        - User interaction (click) is required to unmute
-        - This implementation starts muted and allows user to unmute via toggle button
+        Mobile Audio Compatibility Features:
+        - Multiple audio sources for better browser support
+        - Enhanced preload strategy for mobile devices
+        - Proper muted handling for autoplay compliance
+        - Cross-browser compatibility (iOS Safari, Android Chrome, etc.)
     -->
     <audio
         id="background-music"
-        src="music/hbd.mp3"
-        loop
         preload="auto"
+        loop
         muted
+        playsinline
+        webkit-playsinline
         style="display: none;"
     >
+        <!-- Multiple audio sources for better compatibility -->
+        <source src="music/hbd.mp3" type="audio/mpeg">
+        <source src="music/hbd.ogg" type="audio/ogg">
+        <source src="music/hbd.wav" type="audio/wav">
+        <!-- Fallback for browsers that don't support audio element -->
         Your browser does not support the audio element.
     </audio>
 
@@ -2608,16 +2615,17 @@
 
 
 
+
         // ============================================
-        // HTML5 AUDIO BACKGROUND MUSIC WITH TOGGLE
+        // MOBILE-OPTIMIZED HTML5 AUDIO BACKGROUND MUSIC
         // ============================================
         /*
-         * Browser Autoplay Behavior:
-         * 1. HTML5 audio with muted attribute can autoplay in most browsers
-         * 2. User interaction required to unmute (browsers block unmuted autoplay)
-         * 3. The loop attribute enables continuous playback
-         * 4. preload="auto" ensures audio is ready when needed
-         * 5. Toggle button changes muted property and manages playback state
+         * Mobile Audio Compatibility Features:
+         * 1. Enhanced mobile detection and handling
+         * 2. Multiple audio format support for better compatibility
+         * 3. Improved user interaction handling for mobile browsers
+         * 4. Better error handling and fallbacks
+         * 5. Mobile-specific autoplay policies compliance
          */
 
         const audio = document.getElementById('background-music');
@@ -2625,54 +2633,282 @@
         const iconMuted = document.getElementById('icon-muted');
         const iconSound = document.getElementById('icon-sound');
 
+        // Mobile detection
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const isIOSSafari = /iPad|iPhone|iPod/.test(navigator.userAgent) && /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+        const isAndroidChrome = /Android/.test(navigator.userAgent) && /Chrome/.test(navigator.userAgent);
+
         let isMuted = true;
+        let userHasInteracted = false;
+        let audioReady = false;
 
-        // Initialize audio element
-        audio.volume = 0.5; // Set comfortable volume level
+        // Initialize audio element with mobile-optimized settings
+        function initializeAudio() {
+            audio.volume = 0.6; // Slightly higher volume for mobile
+            audio.loop = true;
+            audio.preload = 'auto';
+            
+            // Set multiple audio sources for better compatibility
+            const audioSources = [
+                'music/hbd.mp3',
+                'music/hbd.mp3' // Fallback to same file if multiple formats needed
+            ];
+            
+            // Add error handling for mobile
+            audio.addEventListener('loadstart', () => {
+                console.log('Audio loading started');
+            });
+            
+            audio.addEventListener('canplaythrough', () => {
+                audioReady = true;
+                console.log('Audio ready to play completely');
+            });
+            
+            audio.addEventListener('canplay', () => {
+                audioReady = true;
+                console.log('Audio ready to play');
+            });
+            
+            // Enhanced error handling
+            audio.addEventListener('error', (e) => {
+                console.error('Audio loading error:', e);
+                handleAudioError();
+            });
+            
+            audio.addEventListener('stalled', () => {
+                console.warn('Audio stalled - trying to resume');
+                if (!audio.paused) {
+                    audio.load(); // Reload audio if stalled
+                }
+            });
+        }
 
-        // Attempt to autoplay when page loads (will start muted)
-        audio.play().then(() => {
-            console.log('Background music autoplay started (muted)');
-            showStatus('🎵 Music ready - click to unmute');
-        }).catch(error => {
-            console.log('Autoplay prevented:', error);
-            showStatus('🔇 Click music button to start');
-        });
+        function handleAudioError() {
+            showStatus('❌ Audio file not found or incompatible');
+            
+            // Try to provide helpful message for mobile users
+            if (isMobile) {
+                setTimeout(() => {
+                    showStatus('📱 Mobile tip: Tap the music button to enable sound');
+                }, 2000);
+            }
+        }
 
-        toggleBtn.addEventListener('click', () => {
-            if (isMuted) {
-                // Unmute and play
-                audio.muted = false;
-                audio.play().then(() => {
-                    iconMuted.style.display = 'none';
-                    iconSound.style.display = 'block';
-                    toggleBtn.setAttribute('aria-pressed', 'true');
-                    showStatus('🎵 Music playing...');
+        // Mobile-optimized audio play function
+        function playAudioMobile() {
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log('Audio playing successfully');
+                    if (isMobile) {
+                        showStatus('🎵 Music playing on mobile');
+                    }
                 }).catch(error => {
                     console.error('Playback failed:', error);
-                    showStatus('❌ Playback failed');
+                    handlePlaybackError(error);
                 });
+            }
+        }
+
+        function handlePlaybackError(error) {
+            let errorMessage = '❌ Playback failed';
+            
+            if (error.name === 'NotAllowedError') {
+                errorMessage = '🔇 Tap music button to enable audio';
+            } else if (error.name === 'NotSupportedError') {
+                errorMessage = '❌ Audio format not supported';
+            } else if (error.name === 'AbortError') {
+                errorMessage = '⚠️ Audio playback interrupted';
+            }
+            
+            showStatus(errorMessage);
+        }
+
+
+        // Enhanced toggle function for mobile with sync
+        function toggleAudio() {
+            if (isMuted) {
+                // Ensure we have user interaction for mobile
+                userHasInteracted = true;
+                
+                // Set volume higher for mobile
+                if (isMobile) {
+                    audio.volume = 0.7;
+                }
+                
+                audio.muted = false;
+                
+                // For mobile, always try to play when unmuting
+                if (isMobile || audio.paused) {
+                    playAudioMobile();
+                }
+                
+                // Add visual feedback for mobile
+                if (isMobile) {
+                    toggleBtn.style.transform = 'scale(0.95)';
+                    if (mobileToggleBtn) {
+                        mobileToggleBtn.style.transform = 'scale(0.95)';
+                    }
+                    setTimeout(() => {
+                        toggleBtn.style.transform = 'scale(1)';
+                        if (mobileToggleBtn) {
+                            mobileToggleBtn.style.transform = 'scale(1)';
+                        }
+                    }, 150);
+                }
+                
+                showStatus('🎵 Music playing...');
             } else {
-                // Mute (keep playing)
+                // Mute audio
                 audio.muted = true;
+                showStatus('🔇 Music muted');
+            }
+            
+            // Sync both toggle buttons
+            syncAllToggles();
+            isMuted = !isMuted;
+        }
+
+        // Initialize audio
+        initializeAudio();
+
+        // For mobile: wait for first user interaction before attempting autoplay
+        if (isMobile) {
+            // Don't attempt autoplay immediately on mobile
+            console.log('Mobile detected - waiting for user interaction');
+            showStatus('📱 Tap music button to start');
+            
+            // Add touch/click listeners for mobile
+            let firstInteractionHandler = () => {
+                userHasInteracted = true;
+                if (audioReady && !audio.paused) {
+                    audio.play().catch(error => {
+                        console.log('Autoplay prevented (expected on mobile):', error);
+                    });
+                }
+                // Remove listeners after first interaction
+                document.removeEventListener('touchstart', firstInteractionHandler);
+                document.removeEventListener('click', firstInteractionHandler);
+            };
+            
+            document.addEventListener('touchstart', firstInteractionHandler, { once: true });
+            document.addEventListener('click', firstInteractionHandler, { once: true });
+            
+        } else {
+            // Desktop: attempt autoplay with muted
+            audio.play().then(() => {
+                console.log('Background music autoplay started (muted)');
+                showStatus('🎵 Music ready - click to unmute');
+            }).catch(error => {
+                console.log('Autoplay prevented:', error);
+                showStatus('🔇 Click music button to start');
+            });
+        }
+
+
+        // Main toggle event listener
+        toggleBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleAudio();
+            updateMobileToggle(); // Sync mobile button state
+        });
+
+        // Mobile toggle button event listener
+        const mobileToggleBtn = document.getElementById('music-toggle-mobile');
+        const iconMutedMobile = document.getElementById('icon-muted-mobile');
+        const iconSoundMobile = document.getElementById('icon-sound-mobile');
+
+        function updateMobileToggle() {
+            if (mobileToggleBtn && iconMutedMobile && iconSoundMobile) {
+                if (isMuted) {
+                    iconMutedMobile.style.display = 'block';
+                    iconSoundMobile.style.display = 'none';
+                    mobileToggleBtn.setAttribute('aria-pressed', 'false');
+                } else {
+                    iconMutedMobile.style.display = 'none';
+                    iconSoundMobile.style.display = 'block';
+                    mobileToggleBtn.setAttribute('aria-pressed', 'true');
+                }
+            }
+        }
+
+        function updateDesktopToggle() {
+            if (isMuted) {
                 iconMuted.style.display = 'block';
                 iconSound.style.display = 'none';
                 toggleBtn.setAttribute('aria-pressed', 'false');
-                showStatus('🔇 Music muted');
+            } else {
+                iconMuted.style.display = 'none';
+                iconSound.style.display = 'block';
+                toggleBtn.setAttribute('aria-pressed', 'true');
             }
-            isMuted = !isMuted;
+        }
+
+        // Sync both toggles when audio state changes
+        function syncAllToggles() {
+            updateDesktopToggle();
+            updateMobileToggle();
+        }
+
+        // Mobile toggle event listeners
+        if (mobileToggleBtn) {
+            mobileToggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleAudio();
+                updateDesktopToggle(); // Sync desktop button state
+            });
+
+            // Mobile touch support
+            mobileToggleBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                toggleAudio();
+                updateDesktopToggle();
+            });
+        }
+
+        // Additional mobile touch support for desktop button
+        if (isMobile) {
+            toggleBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                toggleAudio();
+                updateMobileToggle();
+            });
+        }
+
+        // Enhanced audio events for better mobile support
+        audio.addEventListener('ended', () => {
+            if (!audio.loop) {
+                console.log('Audio ended');
+            }
         });
 
-        // Handle audio loading errors
-        audio.addEventListener('error', (e) => {
-            console.error('Audio loading error:', e);
-            showStatus('❌ Audio file not found');
+        audio.addEventListener('pause', () => {
+            if (isMobile && !audio.muted) {
+                console.log('Audio paused on mobile');
+            }
         });
 
+        audio.addEventListener('playing', () => {
+            console.log('Audio is now playing');
+        });
 
-        // Handle audio canplay event
-        audio.addEventListener('canplay', () => {
-            console.log('Audio ready to play');
+        // Page visibility API for mobile background handling
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                // Page is hidden, audio might pause on mobile
+                if (!audio.muted && !audio.paused) {
+                    console.log('Page hidden - audio may pause on mobile');
+                }
+            } else {
+                // Page is visible again
+                if (!audio.muted && audio.paused) {
+                    console.log('Page visible - resuming audio');
+                    audio.play().catch(error => {
+                        console.log('Resume failed (expected on mobile):', error);
+                    });
+                }
+            }
         });
 
         // ============================================
