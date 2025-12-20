@@ -490,7 +490,7 @@
 
         /* Instagram-Style Birthday Post */
         .instagram-post {
-            max-width: 500px;
+            max-width: 100%;
             margin: 5rem auto;
             background: white;
             border-radius: 15px;
@@ -535,7 +535,7 @@
 
         .post-image {
             width: 100%;
-            aspect-ratio: 2564 / 3205;
+            aspect-ratio: 1;
             background: linear-gradient(135deg, rgba(232, 255, 244, 0.2), rgba(237, 231, 255, 0.2));
             display: flex;
             align-items: center;
@@ -1466,9 +1466,10 @@
                 margin: 3rem auto;
             }
 
-            .post-image {
+            /* Remove fixed height to allow aspect ratio to work */
+            /* .post-image {
                 height: 350px;
-            }
+            } */
 
             .hero {
                 min-height: 40vh;
@@ -1591,9 +1592,10 @@
                 border-radius: 12px;
             }
 
-            .post-image {
+            /* Remove fixed height to allow aspect ratio to work */
+            /* .post-image {
                 height: 250px;
-            }
+            } */
 
             .post-header {
                 padding: 1rem;
